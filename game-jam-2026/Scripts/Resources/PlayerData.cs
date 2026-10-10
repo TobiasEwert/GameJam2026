@@ -10,7 +10,7 @@ public partial class PlayerData : Resource
     [Export] public int roundEarnings {get; set; } // the earnings for the current round, positive or negative, this will be set to zero when your turn  begins
     [Export] public float stockShares {get; set; } // the amount of stock shares a player owns
 
-    //[Export] public <whatever the ability card class is called or string> [] abilityCards;
+    [Export] public CardData[] abilityCards;
     // Can also be a string assigned to each card and we do a switch statement to determine the effects
     
 }
