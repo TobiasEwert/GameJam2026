@@ -8,12 +8,13 @@
 [sub_resource type="BoxMesh" id="BoxMesh_l0bqs"]
 
 [node name="Node2D" type="Node2D" unique_id=1824066282]
+script = ExtResource("1_onut3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
-offset_left = -25.0
-offset_top = 79.0
-offset_right = 1129.0
-offset_bottom = 729.0
+offset_left = 759.0
+offset_top = 308.0
+offset_right = 1913.0
+offset_bottom = 958.0
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=444511316]
 position = Vector2(552, 410)
@@ -48,7 +49,7 @@ offset_bottom = 118.0
 text = "Round 10"
 script = ExtResource("3_ce0ef")
 
-[node name="Label4" type="Label" parent="." unique_id=726362810]
+[node name="CurrentPlayer" type="Label" parent="." unique_id=726362810]
 offset_left = 411.0
 offset_top = 76.0
 offset_right = 559.0
@@ -57,5 +58,17 @@ scale = Vector2(2, 2)
 text = "Player "
 horizontal_alignment = 1
 
-[node name="WheelRoot" parent="." unique_id=1441251757 instance=ExtResource("2_crmak")]
-position = Vector2(556, 291)
+[node name="Cards" type="TextureRect" parent="." unique_id=737442394]
+offset_left = 11.0
+offset_top = 430.0
+offset_right = 266.0
+offset_bottom = 705.0
+
+[node name="GridContainer" type="GridContainer" parent="Cards" unique_id=466967619]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 260.0
+offset_bottom = 280.0
+columns = 2
+script = ExtResource("3_7yklr")
