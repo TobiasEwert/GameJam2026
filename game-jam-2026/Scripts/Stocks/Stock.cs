@@ -3,7 +3,7 @@ using System;
 
 public partial class Stock : Node
 {
-  [Export] public float CurrentValue = 100.f
+  [Export] public float CurrentValue = 100.f;
   private Random _random = new Random();
 
   public void AdvanceMarketRound()
@@ -33,7 +33,7 @@ public partial class Stock : Node
       float sharesOwned = player.InvestedMoney / player.PurchasePrice;
       int payoutValue = Mathf.RoundToInt(sharesOwned * CurrentValue);
 
-      player.CurrentMoney += payoutValue
+      player.CurrentMoney += payoutValue;
       player.InvestedMoney = 0;
       player.PurchasePrice = 0.0f;
     }
