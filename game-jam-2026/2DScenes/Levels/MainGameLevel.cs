@@ -5,8 +5,9 @@ public partial class MainGameLevel : Node2D
 {
   [Export] private CardObject2D _cardTemplate;
   private Label _PlayerName;
-  
   private PlayerData _activePlayer;
+
+  private Label _currentMoney
   private TextureRect _Cards;
   private GridContainer _CardInventory;
   public TurnManager _Turn;
@@ -34,13 +35,12 @@ public partial class MainGameLevel : Node2D
       child.QueueFree();
     }
 
-    foreach (CardData card in _activePlayer.activeHandCards)
-    {
-      if(_cardTemplate.Instantiate() is CardObject2D cardView)
-      {
-        cardView.AssignedCardData = card;
-        _CardInventory.AddChild(cardView);
-      }
-    }
+    // Test it to see if it pulls the card icon data successfully
+    // foreach (ResourceData resource in _activePlayer.activeResources)
+    // {
+    //   _Cards = _resourceIconTemplate.Instantiate<TextureRect>();
+    //   _Cards = resource.ResourceIcon;
+    //   _resourceGridContainer.AddChild(_Cards);
+    // }
   }
 }
