@@ -9,6 +9,6 @@ Label = "Bust"
 Icon = ExtResource("1_ipu3j")
 Type = 0
 Amount = 0
-Weight = 0.4
+Weight = 0.1
 Color = Color(0, 0, 0, 1)
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

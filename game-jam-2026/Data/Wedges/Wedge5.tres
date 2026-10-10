@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Wedge" format=3 uid="uid://bdpb0t56rl0n6"]
+
+[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="1_144rv"]
+[ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="2_dwqga"]
+
+[resource]
+script = ExtResource("2_dwqga")
+Label = "Double"
+Icon = ExtResource("1_144rv")
+Type = 3
+Amount = 0
+Weight = 0.1
+Color = Color(0.8784314, 0.4627451, 1, 1)
+metadata/_custom_type_script = "uid://dktxdbn3dud04"

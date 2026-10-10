@@ -119,13 +119,13 @@ public partial class TurnManager : Node
 				currentPlayer.roundEarnings -= nextSpinCost;
 				break;
 			case Wedge.WedgeType.Double:
-				currentPlayer.roundEarnings += wedge.Amount * 2;
+				currentPlayer.roundEarnings += nextSpinCost * 2;
 				break;
 			case Wedge.WedgeType.Triple:
-				currentPlayer.roundEarnings += wedge.Amount * 3;
+				currentPlayer.roundEarnings += nextSpinCost  * 3;
 				break;
 			case Wedge.WedgeType.Half:
-				currentPlayer.roundEarnings += wedge.Amount / 2;
+				currentPlayer.roundEarnings += nextSpinCost / 2;
 				break;
 			case Wedge.WedgeType.Add:
 				currentPlayer.roundEarnings += wedge.Amount;
