@@ -6,26 +6,45 @@
 [ext_resource type="Resource" uid="uid://ba5v3njs874nt" path="res://Data/Wedges/Wedge1.tres" id="4_eod1k"]
 [ext_resource type="Resource" uid="uid://b7q1vfvyre2tx" path="res://Data/Wedges/Wedge2.tres" id="5_ybl86"]
 [ext_resource type="Resource" uid="uid://cpvj4yquhi4vy" path="res://Data/Wedges/Wedge3.tres" id="6_nnn5j"]
-[ext_resource type="Resource" uid="uid://cml3w7lnbyvig" path="res://Data/Wedges/Wedge4.tres" id="7_ij6kh"]
-[ext_resource type="Resource" uid="uid://bdpb0t56rl0n6" path="res://Data/Wedges/Wedge5.tres" id="8_mdv5u"]
 [ext_resource type="Resource" uid="uid://diukdc25l21t6" path="res://Data/Wedges/Wedge6.tres" id="9_2p2tj"]
-[ext_resource type="Resource" uid="uid://duwu46vwreu5w" path="res://Data/Wedges/Wedge7.tres" id="10_8330w"]
-[ext_resource type="Resource" uid="uid://bh16748cx7c0k" path="res://Data/Wedges/Wedge8.tres" id="11_j3dfa"]
-[ext_resource type="Resource" uid="uid://ciqmqn40xf0q0" path="res://Data/Wedges/Wedge9.tres" id="12_6tf85"]
-[ext_resource type="Resource" uid="uid://ddvqf4d6qtnp5" path="res://Data/Wedges/Wedge10.tres" id="13_gumw0"]
+[ext_resource type="Script" uid="uid://dktwrndgyocx" path="res://Scripts/Wheel/WedgeFeedback.cs" id="14_nnn5j"]
 
-[node name="WheelRoot" type="Node2D" unique_id=1441251757]
-script = ExtResource("1_eod1k")
+[node name="WheelBase" type="Node2D" unique_id=1083205891]
 
 [node name="Wheel" type="Node2D" parent="." unique_id=2050560909]
 script = ExtResource("2_c5ljd")
-Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("10_8330w"), ExtResource("8_mdv5u"), ExtResource("4_eod1k"), ExtResource("7_ij6kh"), ExtResource("11_j3dfa"), ExtResource("9_2p2tj"), ExtResource("12_6tf85"), ExtResource("13_gumw0")])
+Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j")])
 SpinTime = 8.93
+
+[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton")]
+script = ExtResource("1_eod1k")
+wheel = NodePath("..")
+spinButton = NodePath("../../Spin")
+bankButton = NodePath("../../Bank Money")
+
+[node name="WedgeFeedback" type="Node" parent="Wheel/WheelRoot" unique_id=1026609829 node_paths=PackedStringArray("spinButton", "bankButton")]
+script = ExtResource("14_nnn5j")
+spinButton = NodePath("../../../Spin")
+bankButton = NodePath("../../../Bank Money")
+
+[node name="Spin" type="Button" parent="." unique_id=1403386969]
+offset_left = -84.0
+offset_top = 321.0
+offset_right = -42.0
+offset_bottom = 352.0
+text = "Spin
+"
+
+[node name="Bank Money" type="Button" parent="." unique_id=1654285049]
+offset_left = -13.0
+offset_top = 321.0
+offset_right = 91.0
+offset_bottom = 352.0
+text = "Bank Money
+"
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
 position = Vector2(141, 82)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-153.5, -82, -129.5, -82, -140.5, 35.5)
 uv = PackedVector2Array(-153.5, -82, -134.5, -82.5, -136, 38)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1708897101]

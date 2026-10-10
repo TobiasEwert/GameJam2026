@@ -12,7 +12,8 @@ public partial class Wedge : Resource
 		Double,
 		Triple,
 		Half,
-		Add
+		Add,
+		AbilityCard
 		// New wedge types are added here
 	}
     [Export] public string Label = "+$20";

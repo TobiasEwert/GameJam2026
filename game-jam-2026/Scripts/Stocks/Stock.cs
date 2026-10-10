@@ -8,13 +8,19 @@ public partial class Stock : Node
   private Random _random = new Random();
 
   public TurnManager turnManager;
+  public static Stock Instance { get; private set; }
 
     public override void _Ready()
     {
         base._Ready();
+        Instance = this;
         turnManager = TurnManager.Instance;
+        turnManager.RoundChanged += OnRoundChanged;
     }
-
+    private void OnRoundChanged(int round)
+    {
+        AdvanceMarketRound();
+    }
 
   public void AdvanceMarketRound()
   {

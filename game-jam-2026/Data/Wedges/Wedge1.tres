@@ -1,11 +1,14 @@
 [gd_resource type="Resource" script_class="Wedge" format=3 uid="uid://ba5v3njs874nt"]
 
-[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://360_F_2020457641_JqmYwRTrqI6iiPQm2ciqZCNRxDETMLtI.webp" id="1_rytbk"]
+[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="1_rytbk"]
 [ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="2_l82na"]
 
 [resource]
 script = ExtResource("2_l82na")
+Label = "Lose Bet"
 Icon = ExtResource("1_rytbk")
+Type = 2
+Amount = 0
 Weight = 0.1
 Color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

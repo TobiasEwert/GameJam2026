@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://yx167k4gv5hv"
-path="res://.godot/imported/360_F_2020457641_JqmYwRTrqI6iiPQm2ciqZCNRxDETMLtI.webp-318349f82cd13df2c43e5d4e910b7557.ctex"
+path="res://.godot/imported/testingIcon.webp-63c8b026fd65de317a61ee5d073fe03e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://360_F_2020457641_JqmYwRTrqI6iiPQm2ciqZCNRxDETMLtI.webp"
-dest_files=["res://.godot/imported/360_F_2020457641_JqmYwRTrqI6iiPQm2ciqZCNRxDETMLtI.webp-318349f82cd13df2c43e5d4e910b7557.ctex"]
+source_file="res://Art/Sprites/testingIcon.webp"
+dest_files=["res://.godot/imported/testingIcon.webp-63c8b026fd65de317a61ee5d073fe03e.ctex"]
 
 [params]
 

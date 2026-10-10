@@ -18,6 +18,10 @@ public partial class Wheel : Node2D
     bool spinning;
     int lastIndexUnderPointer = -1;
 
+    // Line outline for each wedge
+    [Export] public Color LineColor = Colors.Black;
+    [Export] public float LineWidth = 3f;
+
     public override void _Ready()
     {
         rng.Randomize();
@@ -55,7 +59,7 @@ public partial class Wheel : Node2D
             }
             DrawColoredPolygon(pts, Wedges[i].Color);
 
-            float mid = ((starts[i] + ends[i]) / 2f);
+            float mid = (starts[i] + ends[i]) / 2f;
             DrawSetTransform(Vector2.FromAngle(mid) * Radius * 0.4f, mid, Vector2.One);
             DrawString(ThemeDB.FallbackFont, new Vector2(-24, 6), Wedges[i].Label, HorizontalAlignment.Center, 96, 18);
             mid = (starts[i] + ends[i]) / 2f;
@@ -66,8 +70,14 @@ public partial class Wheel : Node2D
             DrawTextureRect(Wedges[i].Icon, new Rect2(-Vector2.One * iconSize / 2f, Vector2.One * iconSize), false, null, false);
             DrawSetTransform(Vector2.Zero, 0f, Vector2.One);   
             GD.Print("Drawing wedge ", i);
-
         }
+        // Wedge Outline 
+        for (int i = 0; i < Wedges.Count; i++)
+        {
+            Vector2 edge = Vector2.FromAngle(starts[i]) * Radius;
+            DrawLine(Vector2.Zero, edge, LineColor, LineWidth, true);
+        }
+        DrawArc(Vector2.Zero, Radius, 0f, Mathf.Tau, 64, LineColor, LineWidth, true);
     }
 
     public void Spin()
@@ -106,7 +116,7 @@ public partial class Wheel : Node2D
         if (!spinning)
         {   
             return; 
-            }
+        }
 
         int i = IndexUnderPointer();
         if (i != lastIndexUnderPointer)
