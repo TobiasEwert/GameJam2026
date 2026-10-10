@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://bh16748cx7c0k" path="res://Data/Wedges/Wedge8.tres" id="11_j3dfa"]
 [ext_resource type="Resource" uid="uid://ciqmqn40xf0q0" path="res://Data/Wedges/Wedge9.tres" id="12_6tf85"]
 [ext_resource type="Resource" uid="uid://ddvqf4d6qtnp5" path="res://Data/Wedges/Wedge10.tres" id="13_gumw0"]
+[ext_resource type="AudioStream" uid="uid://wkd7b5v1a6l6" path="res://Audio/SFX/WheelTick.mp3" id="14_nnn5j"]
 
 [node name="WheelRoot" type="Node2D" unique_id=1441251757]
 script = ExtResource("1_eod1k")
@@ -28,4 +29,5 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-153.5, -82, -129.5, -82, -140.5, 35.5)
 uv = PackedVector2Array(-153.5, -82, -134.5, -82.5, -136, 38)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1708897101]
+[node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=1062596469]
+stream = ExtResource("14_nnn5j")
