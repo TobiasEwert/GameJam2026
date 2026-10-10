@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameConfig" format=3 uid="uid://bfnkkoc7q12i5"]
+
+[ext_resource type="Script" uid="uid://c26ph1s3u1bks" path="res://Scripts/GameConfig/GameConfig.cs" id="1_uvs5k"]
+
+[resource]
+script = ExtResource("1_uvs5k")
+startingCurrency = 100
+maxRounds = 10
+baseSpinCost = 5

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://kx36ulhotujb"]
+
+[ext_resource type="Script" uid="uid://cdowjwy5w0enf" path="res://Scripts/TurnManager/TurnManager.cs" id="1_03rss"]
+[ext_resource type="Resource" uid="uid://bfnkkoc7q12i5" path="res://Data/GameConfig/GameConfig.tres" id="2_80onc"]
+
+[node name="TurnManager" type="Node" unique_id=1460189294]
+script = ExtResource("1_03rss")
+gameConfig = ExtResource("2_80onc")
