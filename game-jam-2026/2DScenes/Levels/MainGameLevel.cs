@@ -33,7 +33,7 @@ public partial class MainGameLevel : Node2D
     _Cards = GetNode<TextureRect>("TextureRect");
     _CardInventory = GetNode<GridContainer>("TextureRect/GridContainer");
 
-    _Wheel.SpinFinished += OnActivePlayerSpinFinished;
+    // _Wheel.SpinFinished += OnActivePlayerSpinFinished;
 
     _player1 = new PlayerData {playerName = "Player 1", currency = 100, luck = 1.0f};
     _player2 = new PlayerData {playerName = "Player 2", currency = 100, luck = 1.0f};
@@ -53,7 +53,7 @@ public partial class MainGameLevel : Node2D
     _activePlayer.roundEarnings = 0;
 
     UpdateUIElements();
-    RebuildCardInventoryDisplay();
+    // RebuildCardInventoryDisplay();
   }
 
   public void UpdateUIElements()
