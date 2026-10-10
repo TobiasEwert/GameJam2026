@@ -7,7 +7,8 @@ public partial class MainGameLevel : Node2D
   private Label _PlayerName;
   private PlayerData _activePlayer;
 
-  private Label _currentMoney
+  private Label _currentMoney;
+  private Label _RoundMoney;
   private TextureRect _Cards;
   private GridContainer _CardInventory;
   public TurnManager _Turn;
