@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cjdtk3y243uap"]
+
+[ext_resource type="Script" uid="uid://cw1ox3hffqx8y" path="res://Scripts/UI/RoundPotLabel.cs" id="1_bxsvx"]
+
+[node name="RoundMoney" type="Label" unique_id=359219422]
+offset_left = 5.0
+offset_top = 138.0
+offset_right = 174.0
+offset_bottom = 161.0
+text = "Money Earned: $0"
+script = ExtResource("1_bxsvx")

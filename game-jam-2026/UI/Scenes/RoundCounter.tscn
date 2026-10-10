@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://be4ltqnwilfge"]
+
+[ext_resource type="Script" uid="uid://dp5tcui7tj12s" path="res://Scripts/UI/RoundCounterLabel.cs" id="1_dlk56"]
+
+[node name="Round" type="Label" unique_id=1559975218]
+offset_left = 1022.0
+offset_top = 95.0
+offset_right = 1111.0
+offset_bottom = 118.0
+text = "Round 10"
+script = ExtResource("1_dlk56")
