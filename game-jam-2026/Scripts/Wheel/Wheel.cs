@@ -13,14 +13,14 @@ public partial class Wheel : Node2D
 
     const float PointerAngle = -Mathf.Pi / 2f;
 
-    readonly RandomNumberGenerator _rng = new();
-    float[] _starts, _ends; 
-    bool _spinning;
-    int _lastIndexUnderPointer = -1;
+    readonly RandomNumberGenerator rng = new();
+    float[] starts, ends; 
+    bool spinning;
+    int lastIndexUnderPointer = -1;
 
     public override void _Ready()
     {
-        _rng.Randomize();
+        rng.Randomize();
         RebuildAngles();
     }
 
@@ -29,14 +29,14 @@ public partial class Wheel : Node2D
         float total = 0f;
         foreach (var w in Wedges) total += w.Weight;
 
-        _starts = new float[Wedges.Count];
-        _ends = new float[Wedges.Count];
+        starts = new float[Wedges.Count];
+        ends = new float[Wedges.Count];
         float a = 0f;
         for (int i = 0; i < Wedges.Count; i++)
         {
-            _starts[i] = a;
+            starts[i] = a;
             a += Mathf.Tau * Wedges[i].Weight / total;
-            _ends[i] = a;
+            ends[i] = a;
         }
         QueueRedraw();
     }
@@ -50,63 +50,68 @@ public partial class Wheel : Node2D
             pts[0] = Vector2.Zero;
             for (int s = 0; s <= 32; s++)
             {
-                float t = Mathf.Lerp(_starts[i], _ends[i], s / 32f);
+                float t = Mathf.Lerp(starts[i], ends[i], s / 32f);
                 pts[s + 1] = Vector2.FromAngle(t) * Radius;
             }
             DrawColoredPolygon(pts, Wedges[i].Color);
 
-            float mid = ((_starts[i] + _ends[i]) / 2f);
+            float mid = ((starts[i] + ends[i]) / 2f);
             DrawSetTransform(Vector2.FromAngle(mid) * Radius * 0.4f, mid, Vector2.One);
             DrawString(ThemeDB.FallbackFont, new Vector2(-24, 6), Wedges[i].Label, HorizontalAlignment.Center, 96, 18);
-            mid = (_starts[i] + _ends[i]) / 2f;
+            mid = (starts[i] + ends[i]) / 2f;
             Vector2 center = Vector2.FromAngle(mid) * Radius * 0.8f;
             float iconSize = 24f; 
 
             DrawSetTransform(center, mid, Vector2.One);
-            DrawTextureRect(Wedges[i].Icon,
-                new Rect2(-Vector2.One * iconSize / 2f, Vector2.One * iconSize),
-                false, null, false);
+            DrawTextureRect(Wedges[i].Icon, new Rect2(-Vector2.One * iconSize / 2f, Vector2.One * iconSize), false, null, false);
             DrawSetTransform(Vector2.Zero, 0f, Vector2.One);   
-                            GD.Print("Drawing wedge ", i);
+            GD.Print("Drawing wedge ", i);
 
         }
     }
 
     public void Spin()
     {
-        if (_spinning || Wedges.Count == 0) return;
-        _spinning = true;
+        if (spinning || Wedges.Count == 0) 
+        {
+            return;
+        }
+        spinning = true;
 
         var weights = new float[Wedges.Count];
-        for (int i = 0; i < Wedges.Count; i++) weights[i] = Wedges[i].Weight;
-        int index = (int)_rng.RandWeighted(weights);
+        for (int i = 0; i < Wedges.Count; i++) 
+        {  
+            weights[i] = Wedges[i].Weight;
+        }
+        int index = (int)rng.RandWeighted(weights);
 
-        float margin = (_ends[index] - _starts[index]) * 0.15f;
-        float landAngle = _rng.RandfRange(_starts[index] + margin, _ends[index] - margin);
+        float margin = (ends[index] - starts[index]) * 0.15f;
+        float landAngle = rng.RandfRange(starts[index] + margin, ends[index] - margin);
 
         Rotation = Mathf.PosMod(Rotation, Mathf.Tau);
         float offset = Mathf.PosMod(PointerAngle - landAngle - Rotation, Mathf.Tau);
         float target = Rotation + MinTurns * Mathf.Tau + offset;
 
         var tween = CreateTween();
-        tween.TweenProperty(this, "rotation", target, SpinTime)
-             .SetTrans(Tween.TransitionType.Quint)
-             .SetEase(Tween.EaseType.Out);
+        tween.TweenProperty(this, "rotation", target, SpinTime).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.Out);
         tween.Finished += () =>
         {
-            _spinning = false;
+            spinning = false;
             EmitSignal(SignalName.SpinFinished, Wedges[index]);
         };
     }
 
     public override void _Process(double delta)
     {
-        if (!_spinning) return;
+        if (!spinning)
+        {   
+            return; 
+            }
 
         int i = IndexUnderPointer();
-        if (i != _lastIndexUnderPointer)
+        if (i != lastIndexUnderPointer)
         {
-            _lastIndexUnderPointer = i;
+            lastIndexUnderPointer = i;
             TickSound?.Play();
         }
     }
@@ -114,8 +119,10 @@ public partial class Wheel : Node2D
     public int IndexUnderPointer()
     {
         float local = Mathf.PosMod(PointerAngle - Rotation, Mathf.Tau);
-        for (int i = 0; i < _ends.Length; i++)
-            if (local < _ends[i]) return i;
-        return _ends.Length - 1;
+        for (int i = 0; i < ends.Length; i++)
+        {
+            if (local < ends[i]) return i;
+        }
+        return ends.Length - 1;
     }
 }

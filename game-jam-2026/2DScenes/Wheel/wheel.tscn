@@ -29,9 +29,3 @@ polygon = PackedVector2Array(-153.5, -82, -129.5, -82, -140.5, 35.5)
 uv = PackedVector2Array(-153.5, -82, -134.5, -82.5, -136, 38)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1708897101]
-
-[node name="Control" type="Control" parent="." unique_id=1475673131]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0

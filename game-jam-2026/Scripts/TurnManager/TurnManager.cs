@@ -17,20 +17,9 @@ public partial class TurnManager : Node
 		StartGame, // any ui or setup needed at the start of the game
 		TurnStart, // the beginning of a player's turn, switch the ui for the new player, any other visual changes
 		PlayerAction, // choose an action, end turn, spin, invest, or use an ability card
-		ActionWaiting, // waiting for the action to complete, waiting for the wheel to finish spinning, apply the results, return to ActionWaiting and wait for them to continue or end the turn
+		ActionWaiting, // waiting for the action to complete, waiting for the wheel to finish spinning, apply the results, return to PlayerAction and wait for them to continue or end the turn
 		TurnEnd, // once the player ends their turn or they bust then transition to the next player, go to turn start
 		GameOver
-	}
-
-	public enum WedgeType
-	{
-		Bust,
-		BreakEven,
-		Lose,
-		Double,
-		Triple,
-		Half,
-		// New wedge types are added here
 	}
 
 	[Export] public GameConfig gameConfig { get; set; }
@@ -78,6 +67,7 @@ public partial class TurnManager : Node
 	}
 
 	// Will be called externally, if true, then it spins, if false, it does not.
+	// If true go to ActionWaiting state
 	public bool TryPaySpin()
 	{
 		if(currentState != TurnState.PlayerAction)
@@ -93,11 +83,45 @@ public partial class TurnManager : Node
 
 		currentPlayer.currency -= spinCost;
 		spinsThisTurn++;
-		currentState = TurnState.ActionWaiting;
 
 		EmitSignal(SignalName.MoneyChanged, currentPlayerIndex, currentPlayer.currency);
 
 		return true;
+	}
+
+	public void WedgeAction(Wedge wedge)
+	{
+		// Go to ActionWaiting state
+		// The enum is in Wedge.cs add whatever types you want
+		switch (wedge.Type)
+		{
+			case Wedge.WedgeType.Bust:
+				// Handle bust logic
+				break;
+			case Wedge.WedgeType.BreakEven:
+				// Handle break even logic
+				break;
+			case Wedge.WedgeType.Lose:
+				// Handle lose logic
+				break;
+			case Wedge.WedgeType.Double:
+				// Handle double logic
+				break;
+			case Wedge.WedgeType.Triple:
+				// Handle triple logic
+				break;
+			case Wedge.WedgeType.Half:
+				// Handle half logic
+				break;
+			// Add additional wedge types here
+
+			//Emit signal money changed
+			//Change state back to PlayerAction
+		}
+
+		// Action Card logic has not been implemented
+		//Emit signal money changed
+		//Change state back to PlayerAction
 	}
 	
 
