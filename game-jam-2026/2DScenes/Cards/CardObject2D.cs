@@ -33,7 +33,6 @@ public partial class CardObject2D : GridContainer
       child.QueueFree();
     }
 
-     //Test it to see if it pulls the card icon data successfully
      for (int i = 0; i < activePlayer.abilityCards.Count; i++)
     {
       var cardData = activePlayer.abilityCards[i];
