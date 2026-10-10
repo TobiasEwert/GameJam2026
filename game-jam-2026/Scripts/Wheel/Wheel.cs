@@ -11,7 +11,7 @@ public partial class Wheel : Node2D
     [Export] public int MinTurns = 4;
     [Export] public AudioStreamPlayer TickSound;
 
-    const float PointerAngle = -Mathf.Pi / 2f;
+    const float PointerAngle = Mathf.Pi / 2f;
 
     readonly RandomNumberGenerator rng = new();
     float[] starts, ends; 

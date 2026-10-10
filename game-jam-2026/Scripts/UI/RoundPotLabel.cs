@@ -8,10 +8,15 @@ public partial class RoundPotLabel : Label
 	{
 		turnManager = TurnManager.Instance;
 		turnManager.PotChanged += OnRoundPotChanged;
+		turnManager.TurnStarted += OnTurnStarted;
 	}
 
 	private void OnRoundPotChanged(int playerIndex, int potAmount)
 	{
 		this.Text = $"Round Pot:${potAmount}";
+	}
+	private void OnTurnStarted(int playerIndex)
+	{
+		OnRoundPotChanged(playerIndex, turnManager.currentPlayer.roundEarnings);
 	}
 }

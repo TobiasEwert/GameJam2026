@@ -39,6 +39,7 @@ public partial class TurnManager : Node
 	public int currentRound { get; set; }
 	public int spinsThisTurn { get; set; }
 	public int nextSpinCost => startingSpinCost * spinsThisTurn;	
+	public CardData[] possibleCards { get; set; }	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -130,6 +131,17 @@ public partial class TurnManager : Node
 			case Wedge.WedgeType.Add:
 				currentPlayer.roundEarnings += wedge.Amount;
 				break;
+			case Wedge.WedgeType.AbilityCard:
+				if(currentPlayer.abilityCards.Count < 4)
+				{
+					var rng = new RandomNumberGenerator();
+					rng.Randomize();
+					int instanceRandom = rng.RandiRange(0, possibleCards.Length - 1);
+					currentPlayer.abilityCards.Add(possibleCards[instanceRandom]);
+				}	
+
+				break;
+
 			// Add additional wedge types here
 		}
 		spinsThisTurn++;
@@ -183,6 +195,7 @@ public partial class TurnManager : Node
 			if(currentRound <= 0)
 			{
 				EndGame();
+				EmitSignal(SignalName.RoundChanged, 0);
 				return;
 			}
 			EmitSignal(SignalName.RoundChanged, currentRound);

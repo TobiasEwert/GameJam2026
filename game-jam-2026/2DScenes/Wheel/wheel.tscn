@@ -47,10 +47,11 @@ text = "Bank Money
 "
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
-position = Vector2(141, 82)
+position = Vector2(-152, 34)
+rotation = 3.1415927
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-153.5, -82, -129.5, -82, -140.5, 35.5)
-uv = PackedVector2Array(-153.5, -82, -134.5, -82.5, -136, 38)
+polygon = PackedVector2Array(-158, 36, -144, 36, -152, -64)
+uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)
 
 [node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=441105140]
 stream = ExtResource("10_gquxa")

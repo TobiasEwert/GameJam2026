@@ -1,15 +1,45 @@
 [gd_scene format=3 uid="uid://b3go1rufmvhyi"]
 
 [ext_resource type="PackedScene" uid="uid://n7wgelgwviyp" path="res://UI/Scenes/CurrentMoney.tscn" id="1_ce0ef"]
+[ext_resource type="Script" uid="uid://cuhsiqa5supx2" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_hfy5k"]
+[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="2_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://cjdtk3y243uap" path="res://UI/Scenes/RoundMoney.tscn" id="2_cpi3i"]
 [ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
+[ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="3_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://be4ltqnwilfge" path="res://UI/Scenes/RoundCounter.tscn" id="3_uw4gr"]
 [ext_resource type="PackedScene" uid="uid://dhuw7hnhu05x2" path="res://UI/Scenes/PlayerName.tscn" id="4_1vbin"]
+[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_euts4"]
+[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_12uyl"]
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
+
+[sub_resource type="Resource" id="Resource_y8rvs"]
+script = ExtResource("3_qsmkw")
+CardName = "TEST 1"
+Description = "TEST 1"
+Icon = ExtResource("2_bgl7e")
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="Resource" id="Resource_u1ot7"]
+script = ExtResource("3_qsmkw")
+CardName = "TEST 2"
+Description = "TEST 2"
+Icon = ExtResource("4_euts4")
+ActionId = 1
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="Resource" id="Resource_nt8ol"]
+script = ExtResource("3_qsmkw")
+CardName = "TEST 3"
+Description = "TEST 3"
+Icon = ExtResource("5_12uyl")
+ActionId = 2
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="BoxMesh" id="BoxMesh_l0bqs"]
 
 [node name="Node2D" type="Node2D" unique_id=1824066282]
+script = ExtResource("1_hfy5k")
+allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
 offset_left = 759.0
@@ -30,6 +60,8 @@ mesh = SubResource("BoxMesh_l0bqs")
 position = Vector2(552, 404)
 
 [node name="Round" parent="." unique_id=1559975218 instance=ExtResource("3_uw4gr")]
+offset_left = 915.0
+offset_right = 1004.0
 
 [node name="CurrentPlayer" parent="." unique_id=1908609233 instance=ExtResource("4_1vbin")]
 

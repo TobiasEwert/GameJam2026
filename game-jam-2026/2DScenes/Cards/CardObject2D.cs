@@ -15,7 +15,12 @@ public partial class CardObject2D : GridContainer
 
     _Turn = TurnManager.Instance;
     _cardInventory = this;
-    await ToSignal(GetTree().CreateTimer(4.0f), "timeout");       
+    _Turn.WedgeResolved += OnWedgeResolved;
+    _Turn.TurnStarted += OnTurnStarted;
+
+  }
+  private void OnTurnStarted(int playerIndex)
+  {
     RebuildCardInventoryDisplay();
   }
   private void RebuildCardInventoryDisplay()
@@ -26,7 +31,7 @@ public partial class CardObject2D : GridContainer
     }
 
      //Test it to see if it pulls the card icon data successfully
-     for (int i = 0; i < activePlayer.abilityCards.Length; i++)
+     for (int i = 0; i < activePlayer.abilityCards.Count; i++)
     {
       var cardData = activePlayer.abilityCards[i];
       var btn = new Button();
@@ -44,6 +49,14 @@ public partial class CardObject2D : GridContainer
   public void _on_button_pressed(int index)
   {
       EmitSignal(SignalName.CardSelected, activePlayer.abilityCards[index]);
-      QueueFree();
+      activePlayer.abilityCards.RemoveAt(index);
+      RebuildCardInventoryDisplay();
+  }
+  private void OnWedgeResolved(Wedge wedge, int oldPot, int newPot)
+  {
+    if(wedge.Type == Wedge.WedgeType.AbilityCard)
+    {
+      RebuildCardInventoryDisplay();
+    } 
   }
 }
