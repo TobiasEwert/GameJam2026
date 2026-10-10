@@ -2,7 +2,51 @@
 
 [ext_resource type="Script" uid="uid://cdowjwy5w0enf" path="res://Scripts/TurnManager/TurnManager.cs" id="1_03rss"]
 [ext_resource type="Resource" uid="uid://bfnkkoc7q12i5" path="res://Data/GameConfig/GameConfig.tres" id="2_80onc"]
+[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="3_vd6cp"]
+[ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="4_hkgwd"]
+[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="5_y7ogw"]
+[ext_resource type="Script" uid="uid://yupj2l8weto7" path="res://Scripts/Resources/PlayerData.cs" id="6_qawql"]
+
+[sub_resource type="Resource" id="Resource_cpi3i"]
+script = ExtResource("4_hkgwd")
+CardName = "TEsting 1"
+Description = "This test"
+Icon = ExtResource("3_vd6cp")
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="Resource" id="Resource_uw4gr"]
+script = ExtResource("4_hkgwd")
+CardName = "Trestin 2"
+Description = "This test 2"
+Icon = ExtResource("5_y7ogw")
+ActionId = 1
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="Resource" id="Resource_08jof"]
+script = ExtResource("6_qawql")
+currency = 100
+luck = 0.1
+playerName = "Player1"
+abilityCards = Array[Object]([SubResource("Resource_cpi3i"), SubResource("Resource_uw4gr"), SubResource("Resource_cpi3i"), SubResource("Resource_uw4gr")])
+metadata/_custom_type_script = "uid://yupj2l8weto7"
+
+[sub_resource type="Resource" id="Resource_55tcd"]
+script = ExtResource("4_hkgwd")
+CardName = "Test 3"
+Description = " TYest 444"
+Icon = ExtResource("3_vd6cp")
+ActionId = 3
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="Resource" id="Resource_ce0ef"]
+script = ExtResource("6_qawql")
+currency = 111
+luck = 1.0
+playerName = "Player 2"
+abilityCards = Array[Object]([SubResource("Resource_55tcd")])
+metadata/_custom_type_script = "uid://yupj2l8weto7"
 
 [node name="TurnManager" type="Node" unique_id=1460189294]
 script = ExtResource("1_03rss")
 gameConfig = ExtResource("2_80onc")
+players = Array[Object]([SubResource("Resource_08jof"), SubResource("Resource_ce0ef")])

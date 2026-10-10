@@ -3,12 +3,8 @@ using System;
 
 public partial class Stock : Node
 {
-<<<<<<< Updated upstream
   // Add Signals for the ui
-  [Export] public float CurrentValue = 100f;
-=======
-  [Export] public float CurrentValue = 100.f;
->>>>>>> Stashed changes
+  public float CurrentValue = 100f;
   private Random _random = new Random();
 
   public TurnManager turnManager;
@@ -50,14 +46,11 @@ public partial class Stock : Node
     {
       int payoutValue = Mathf.RoundToInt(player.stockShares * CurrentValue);
 
-<<<<<<< Updated upstream
       player.currency += payoutValue;
       player.stockShares = 0;
-=======
-      player.CurrentMoney += payoutValue;
-      player.InvestedMoney = 0;
-      player.PurchasePrice = 0.0f;
->>>>>>> Stashed changes
+      player.currency += payoutValue;
+  
+
     }
   }
 }

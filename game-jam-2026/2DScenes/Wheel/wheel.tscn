@@ -8,14 +8,16 @@
 [ext_resource type="Resource" uid="uid://cpvj4yquhi4vy" path="res://Data/Wedges/Wedge3.tres" id="6_nnn5j"]
 [ext_resource type="Resource" uid="uid://bdpb0t56rl0n6" path="res://Data/Wedges/Wedge5.tres" id="7_5fvti"]
 [ext_resource type="Resource" uid="uid://diukdc25l21t6" path="res://Data/Wedges/Wedge4.tres" id="9_2p2tj"]
+[ext_resource type="AudioStream" uid="uid://wkd7b5v1a6l6" path="res://Audio/SFX/WheelTick.mp3" id="10_gquxa"]
 [ext_resource type="Script" uid="uid://dktwrndgyocx" path="res://Scripts/Wheel/WedgeFeedback.cs" id="14_nnn5j"]
 
 [node name="WheelBase" type="Node2D" unique_id=1083205891]
 
-[node name="Wheel" type="Node2D" parent="." unique_id=2050560909]
+[node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound")]
 script = ExtResource("2_c5ljd")
 Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("7_5fvti"), ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j")])
 SpinTime = 8.93
+TickSound = NodePath("../WheelTick")
 
 [node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton")]
 script = ExtResource("1_eod1k")
@@ -49,3 +51,6 @@ position = Vector2(141, 82)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-153.5, -82, -129.5, -82, -140.5, 35.5)
 uv = PackedVector2Array(-153.5, -82, -134.5, -82.5, -136, 38)
+
+[node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=441105140]
+stream = ExtResource("10_gquxa")

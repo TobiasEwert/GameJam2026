@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://cw1ox3hffqx8y" path="res://Scripts/UI/RoundPotLabel.cs" id="2_08jof"]
 [ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
 [ext_resource type="Script" uid="uid://dp5tcui7tj12s" path="res://Scripts/UI/RoundCounterLabel.cs" id="3_ce0ef"]
+[ext_resource type="Script" uid="uid://c3iqlbtwdlda3" path="res://2DScenes/Cards/CardObject2D.cs" id="4_onut3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l0bqs"]
 
 [node name="Node2D" type="Node2D" unique_id=1824066282]
-script = ExtResource("1_onut3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
 offset_left = 759.0
@@ -71,4 +71,7 @@ offset_top = 5.0
 offset_right = 260.0
 offset_bottom = 280.0
 columns = 2
-script = ExtResource("3_7yklr")
+script = ExtResource("4_onut3")
+
+[node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("2_crmak")]
+position = Vector2(535, 270)

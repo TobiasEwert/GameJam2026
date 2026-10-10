@@ -33,7 +33,7 @@ public partial class TurnManager : Node
 	public Stock stockInstance { get; private set; }
 	public TurnState currentState { get; set; } = TurnState.StartGame;
 	public PlayerData currentPlayer { get; set; }
-	public PlayerData[] players { get; set; }
+	[Export] public PlayerData[] players { get; set; }
 
 	public int currentPlayerIndex { get; set; }
 	public int currentRound { get; set; }
@@ -54,7 +54,7 @@ public partial class TurnManager : Node
 		currentState = TurnState.StartGame;
 		currentPlayerIndex = 0;
 		currentRound = maxRounds;
-		players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; // hardset the names
+		//players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; // hardset the names
 		EmitSignal(SignalName.GameStarted); // might be removed as it may not be necessary
 		EmitSignal(SignalName.RoundChanged, currentRound);
 		StartTurn();
