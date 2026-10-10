@@ -5,7 +5,8 @@ public partial class MainGameLevel : Node2D
 {
   [Export] private CardObject2D _cardTemplate;
   private Label _PlayerName;
-
+  
+  private PlayerData _activePlayer;
   private TextureRect _Cards;
   private GridContainer _CardInventory;
   public TurnManager _Turn;
@@ -26,8 +27,20 @@ public partial class MainGameLevel : Node2D
     _RoundNumber.Text = $"Rounds Remaining: {_currentRoundCount}";
   }
 
-  // private void RebuildCardInventoryDisplay()
-  // {
+  private void RebuildCardInventoryDisplay()
+  {
+    foreach (Node child in _cardInventory.GetChildren())
+    {
+      child.QueueFree();
+    }
 
-  // }
+    foreach (CardData card in _activePlayer.activeHandCards)
+    {
+      if(_cardTemplate.Instantiate() is CardObject2D cardView)
+      {
+        cardView.AssignedCardData = card;
+        _CardInventory.AddChild(cardView);
+      }
+    }
+  }
 }
