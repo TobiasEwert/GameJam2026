@@ -9,7 +9,17 @@
 [ext_resource type="Resource" uid="uid://bdpb0t56rl0n6" path="res://Data/Wedges/Wedge5.tres" id="7_5fvti"]
 [ext_resource type="Resource" uid="uid://diukdc25l21t6" path="res://Data/Wedges/Wedge4.tres" id="9_2p2tj"]
 [ext_resource type="AudioStream" uid="uid://wkd7b5v1a6l6" path="res://Audio/SFX/WheelTick.mp3" id="10_gquxa"]
+[ext_resource type="StyleBox" uid="uid://d2x5b4u64uxre" path="res://UI/Styles/Spin_Normal.tres" id="10_idokj"]
+[ext_resource type="StyleBox" uid="uid://cxrnc0mb8kcpt" path="res://UI/Styles/Spin_Pressed.tres" id="11_nnn5j"]
+[ext_resource type="StyleBox" uid="uid://b4q68bqxugj4j" path="res://UI/Styles/Spin_Hover.tres" id="11_ybl86"]
+[ext_resource type="StyleBox" uid="uid://kp6p8yj8pqrs" path="res://UI/Styles/Bank_Normal.tres" id="12_ybl86"]
+[ext_resource type="StyleBox" uid="uid://ccp1dbvum423e" path="res://UI/Styles/Bank_Pressed.tres" id="14_ij6kh"]
+[ext_resource type="Script" uid="uid://b6w7i4gc6yl3h" path="res://Scripts/UI/ButtonSFX.cs" id="14_j3dfa"]
 [ext_resource type="Script" uid="uid://dktwrndgyocx" path="res://Scripts/Wheel/WedgeFeedback.cs" id="14_nnn5j"]
+[ext_resource type="AudioStream" uid="uid://dv55a3bakne4m" path="res://Audio/SFX/ButtonSelect.wav" id="15_6tf85"]
+[ext_resource type="StyleBox" uid="uid://b4csmfdsbqdmm" path="res://UI/Styles/Spin_Disabled.tres" id="15_mdv5u"]
+[ext_resource type="StyleBox" uid="uid://bfmelgsjo0g86" path="res://UI/Styles/Bank_Hover.tres" id="16_8330w"]
+[ext_resource type="StyleBox" uid="uid://dkasnjv6jeifh" path="res://UI/Styles/Bank_Disabled.tres" id="17_j3dfa"]
 
 [node name="WheelBase" type="Node2D" unique_id=1083205891]
 
@@ -30,21 +40,36 @@ script = ExtResource("14_nnn5j")
 spinButton = NodePath("../../../Spin")
 bankButton = NodePath("../../../Bank Money")
 
-[node name="Spin" type="Button" parent="." unique_id=1403386969]
-offset_left = -84.0
+[node name="Spin" type="Button" parent="." unique_id=1403386969 node_paths=PackedStringArray("audioPlayer")]
+custom_minimum_size = Vector2(128, 64)
+offset_left = -186.0
 offset_top = 321.0
-offset_right = -42.0
+offset_right = -126.0
 offset_bottom = 352.0
-text = "Spin
-"
+theme_override_styles/normal = ExtResource("10_idokj")
+theme_override_styles/pressed = ExtResource("11_nnn5j")
+theme_override_styles/hover = ExtResource("11_ybl86")
+theme_override_styles/disabled = ExtResource("15_mdv5u")
+text = "Spin: $"
+script = ExtResource("14_j3dfa")
+pressedSound = ExtResource("15_6tf85")
+audioPlayer = NodePath("../AudioStreamPlayer2D")
 
-[node name="Bank Money" type="Button" parent="." unique_id=1654285049]
+[node name="Bank Money" type="Button" parent="." unique_id=1654285049 node_paths=PackedStringArray("audioPlayer")]
+custom_minimum_size = Vector2(128, 64)
 offset_left = -13.0
 offset_top = 321.0
 offset_right = 91.0
 offset_bottom = 352.0
+theme_override_styles/normal = ExtResource("12_ybl86")
+theme_override_styles/pressed = ExtResource("14_ij6kh")
+theme_override_styles/hover = ExtResource("16_8330w")
+theme_override_styles/disabled = ExtResource("17_j3dfa")
 text = "Bank Money
 "
+script = ExtResource("14_j3dfa")
+pressedSound = ExtResource("15_6tf85")
+audioPlayer = NodePath("../AudioStreamPlayer2D")
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
 position = Vector2(-152, 34)
@@ -55,3 +80,5 @@ uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)
 
 [node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=441105140]
 stream = ExtResource("10_gquxa")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=686395921]

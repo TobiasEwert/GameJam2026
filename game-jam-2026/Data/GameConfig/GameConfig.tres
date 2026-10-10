@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_uvs5k")
-startingCurrency = 100
+startingCurrency = 1000
 maxRounds = 10
 baseSpinCost = 5

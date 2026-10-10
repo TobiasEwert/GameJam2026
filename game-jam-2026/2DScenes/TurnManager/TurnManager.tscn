@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://yupj2l8weto7"
 
 [sub_resource type="Resource" id="Resource_ce0ef"]
 script = ExtResource("6_qawql")
-currency = 111
+currency = 100
 luck = 1.0
 playerName = "Player 2"
 abilityCards = null

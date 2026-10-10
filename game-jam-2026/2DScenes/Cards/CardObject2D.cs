@@ -8,8 +8,11 @@ public partial class CardObject2D : GridContainer
   private GridContainer _cardInventory;
   public TurnManager _Turn;
   public PlayerData activePlayer => _Turn.currentPlayer;
+  [Export] public AudioStreamPlayer2D audioPlayer;
+  [Export] public AudioStream cardGained;
+  [Export] public AudioStream cardUsed;
 
-  public override async void _Ready()
+  public override void _Ready()
   {
     //_cardNameLabel.Text = AssignedCardData.CardName;
 
@@ -45,17 +48,34 @@ public partial class CardObject2D : GridContainer
       _cardInventory.AddChild(btn);
   }
 }
-  // Test to make sure the function is compatible with grid container
   public void _on_button_pressed(int index)
   {
       EmitSignal(SignalName.CardSelected, activePlayer.abilityCards[index]);
+      audioPlayer.Stream = cardUsed ;
+			audioPlayer.Play();
       activePlayer.abilityCards.RemoveAt(index);
       RebuildCardInventoryDisplay();
+  }
+
+  public void ActivateCardAbility(int index)
+  {
+    switch (index)
+    {
+      case 0:
+        break;
+      case 1:
+        break;
+      default:
+        GD.Print("Invalid card index");
+        break;
+    }
   }
   private void OnWedgeResolved(Wedge wedge, int oldPot, int newPot)
   {
     if(wedge.Type == Wedge.WedgeType.AbilityCard)
     {
+      audioPlayer.Stream = cardGained;
+			audioPlayer.Play();
       RebuildCardInventoryDisplay();
     } 
   }

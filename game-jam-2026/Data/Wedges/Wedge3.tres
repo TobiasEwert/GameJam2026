@@ -5,6 +5,8 @@
 
 [resource]
 script = ExtResource("2_wuuew")
+Label = "+$200"
 Icon = ExtResource("1_shmiu")
+Amount = 200
 Weight = 0.3
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

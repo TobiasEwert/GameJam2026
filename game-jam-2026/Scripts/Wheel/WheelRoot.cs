@@ -23,6 +23,7 @@ public partial class WheelRoot : Node2D
     public void RefreshButtons()
     {
         spinButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
+        spinButton.Text = $"Spin: ${turnManager.nextSpinCost}";
         bankButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
     }
 	private void OnSpinButtonPressed()
