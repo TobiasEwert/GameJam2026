@@ -2,14 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://n7wgelgwviyp" path="res://UI/Scenes/CurrentMoney.tscn" id="1_ce0ef"]
 [ext_resource type="Script" uid="uid://cuhsiqa5supx2" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_hfy5k"]
-[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="2_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://cjdtk3y243uap" path="res://UI/Scenes/RoundMoney.tscn" id="2_cpi3i"]
 [ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
 [ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="3_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://be4ltqnwilfge" path="res://UI/Scenes/RoundCounter.tscn" id="3_uw4gr"]
 [ext_resource type="PackedScene" uid="uid://dhuw7hnhu05x2" path="res://UI/Scenes/PlayerName.tscn" id="4_1vbin"]
-[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_euts4"]
-[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_12uyl"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="4_r10rw"]
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
 [ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
 [ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
@@ -19,14 +17,12 @@
 script = ExtResource("3_qsmkw")
 CardName = "TEST 1"
 Description = "TEST 1"
-Icon = ExtResource("2_bgl7e")
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_u1ot7"]
 script = ExtResource("3_qsmkw")
 CardName = "TEST 2"
 Description = "TEST 2"
-Icon = ExtResource("4_euts4")
 ActionId = 1
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
@@ -34,9 +30,26 @@ metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 script = ExtResource("3_qsmkw")
 CardName = "TEST 3"
 Description = "TEST 3"
-Icon = ExtResource("5_12uyl")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="BoxMesh" id="BoxMesh_l0bqs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yenqd"]
+font = ExtResource("4_r10rw")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_prci7"]
+font = ExtResource("4_r10rw")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_bgain"]
+font = ExtResource("4_r10rw")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_ng7ty"]
+font = ExtResource("4_r10rw")
+font_size = 40
 
 [node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheel", "audioPlayer")]
 script = ExtResource("1_hfy5k")
@@ -54,17 +67,34 @@ offset_right = 1913.0
 offset_bottom = 958.0
 
 [node name="CurrentMoney" parent="." unique_id=772514501 instance=ExtResource("1_ce0ef")]
+offset_right = 140.0
+offset_bottom = 121.0
+label_settings = SubResource("LabelSettings_yenqd")
 
 [node name="RoundMoney" parent="." unique_id=359219422 instance=ExtResource("2_cpi3i")]
+offset_left = -11.0
+offset_top = 133.0
+offset_right = 208.0
+offset_bottom = 159.0
+label_settings = SubResource("LabelSettings_prci7")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
 
 [node name="Round" parent="." unique_id=1559975218 instance=ExtResource("3_uw4gr")]
-offset_left = 915.0
-offset_right = 1004.0
+offset_left = 839.0
+offset_right = 1090.0
+offset_bottom = 121.0
+text = "Rounds remaining 10"
+label_settings = SubResource("LabelSettings_bgain")
 
 [node name="CurrentPlayer" parent="." unique_id=1908609233 instance=ExtResource("4_1vbin")]
+offset_left = 447.0
+offset_top = 100.0
+offset_right = 621.0
+offset_bottom = 152.0
+scale = Vector2(1, 1)
+label_settings = SubResource("LabelSettings_ng7ty")
 
 [node name="Cards" parent="." unique_id=1779756376 instance=ExtResource("5_ce0ef")]
 metadata/_edit_use_anchors_ = true
