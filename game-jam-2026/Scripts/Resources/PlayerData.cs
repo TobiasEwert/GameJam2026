@@ -12,5 +12,6 @@ public partial class PlayerData : Resource
 
     //[Export] public <whatever the ability card class is called or string> [] abilityCards;
     // Can also be a string assigned to each card and we do a switch statement to determine the effects
-    
-}
+    [Export] public Array<CardData> activeHandCards = new()
+    // Missing restriction up to 4 cards
+;}
