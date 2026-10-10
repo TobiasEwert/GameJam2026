@@ -15,7 +15,7 @@ config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 
 [autoload]
 
-TurnManager="*uid://cdowjwy5w0enf"
+TurnManager="*uid://kx36ulhotujb"
 
 [display]
 

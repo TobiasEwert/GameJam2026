@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public partial class GameConfig : Node
+[GlobalClass]
+public partial class GameConfig : Resource
 {
 	[Export] public int startingCurrency {get; set; } // the amount of money players start with
 	[Export] public int maxRounds {get; set; } // the max amount of rounds in the game
