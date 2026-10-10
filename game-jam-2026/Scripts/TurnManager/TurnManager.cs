@@ -28,6 +28,7 @@ public partial class TurnManager : Node
 	public int startingSpinCost { get; set; }
 
 	// Turn manager variables
+	public static TurnManager Instance { get; private set; }
 	public TurnState currentState { get; set; } = TurnState.StartGame;
 	public PlayerData currentPlayer { get; set; }
 	public PlayerData[] players { get; set; }
@@ -39,6 +40,7 @@ public partial class TurnManager : Node
 	public override void _Ready()
 	{
 		base._Ready();
+		Instance = this;
 		maxRounds = gameConfig.maxRounds;
 		startingSpinCost = gameConfig.baseSpinCost;
 	}
@@ -51,7 +53,7 @@ public partial class TurnManager : Node
 		currentRound = 1;
 		players = new [] {new PlayerData {playerName = "Player 1"}, new PlayerData {playerName = "Player 2"}}; // hardset the names
 		EmitSignal(SignalName.GameStarted); // might be removed as it may not be necessary
-		EmitSignal(SignalName.RoundChanged, 1);
+		EmitSignal(SignalName.RoundChanged, 10);
 		StartTurn();
 	}
 
@@ -65,6 +67,17 @@ public partial class TurnManager : Node
 		currentState = TurnState.PlayerAction;
 		// Do Not change state here, change it on the Action Logic, sit on PlayerAction until an action is taken
 	}
+	// Try To Pay
+	public bool TryPay(int amount)
+	{
+		if(currentPlayer.currency >= amount)
+		{
+			currentPlayer.currency -= amount;
+			EmitSignal(SignalName.MoneyChanged, currentPlayerIndex, currentPlayer.currency);
+			return true;
+		}
+		return false;
+	}
 
 	// Will be called externally, if true, then it spins, if false, it does not.
 	// If true go to ActionWaiting state
@@ -76,16 +89,13 @@ public partial class TurnManager : Node
 		}
 
 		int spinCost = startingSpinCost * spinsThisTurn;
-		if(currentPlayer.currency < spinCost)
+		if(!TryPay(spinCost))
 		{
 			return false; // not enough money
 		}
 
-		currentPlayer.currency -= spinCost;
 		spinsThisTurn++;
-
-		EmitSignal(SignalName.MoneyChanged, currentPlayerIndex, currentPlayer.currency);
-
+		currentState = TurnState.ActionWaiting;
 		return true;
 	}
 

@@ -3,8 +3,18 @@ using System;
 
 public partial class Stock : Node
 {
-  [Export] public float CurrentValue = 100.f;
+  // Add Signals for the ui
+  [Export] public float CurrentValue = 100f;
   private Random _random = new Random();
+
+  public TurnManager turnManager;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        turnManager = TurnManager.Instance;
+    }
+
 
   public void AdvanceMarketRound()
   {
@@ -18,24 +28,20 @@ public partial class Stock : Node
 
   public void BuyStock(PlayerData player, int cashToInvest)
   {
-    if(player.CurrentMoney >= cashToInvest)
+    if(turnManager.TryPay(cashToInvest))
     {
-      player.CurrentMoney -= cashToInvest;
-      player.InvestedMoney = cashToInvest;
-      player.PurchasePrice = CurrentValue;
+      player.stockShares = cashToInvest / CurrentValue;
     }
   }
 
   public void SellStock(PlayerData player)
   {
-    if(player.InvestedMoney >= 0)
+    if(player.stockShares > 0)
     {
-      float sharesOwned = player.InvestedMoney / player.PurchasePrice;
-      int payoutValue = Mathf.RoundToInt(sharesOwned * CurrentValue);
+      int payoutValue = Mathf.RoundToInt(player.stockShares * CurrentValue);
 
-      player.CurrentMoney += payoutValue;
-      player.InvestedMoney = 0;
-      player.PurchasePrice = 0.0f;
+      player.currency += payoutValue;
+      player.stockShares = 0;
     }
   }
 }
