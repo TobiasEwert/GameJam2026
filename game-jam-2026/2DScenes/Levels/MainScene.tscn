@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b3go1rufmvhyi"]
 
-[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="1_7kw7j"]
-[ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="1_crmak"]
-[ext_resource type="Script" uid="uid://csuiikw3lttbf" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_onut3"]
-[ext_resource type="Script" uid="uid://c3iqlbtwdlda3" path="res://2DScenes/Cards/CardObject2D.cs" id="3_7yklr"]
+[ext_resource type="Script" uid="uid://c8l0hfegdopjx" path="res://Scripts/UI/MoneyLabel.cs" id="1_onut3"]
+[ext_resource type="Script" uid="uid://cw1ox3hffqx8y" path="res://Scripts/UI/RoundPotLabel.cs" id="2_08jof"]
+[ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
+[ext_resource type="Script" uid="uid://dp5tcui7tj12s" path="res://Scripts/UI/RoundCounterLabel.cs" id="3_ce0ef"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_l0bqs"]
 
@@ -21,104 +21,6 @@ position = Vector2(552, 410)
 scale = Vector2(493.5, 275.5)
 mesh = SubResource("BoxMesh_l0bqs")
 
-[node name="WheelRoot" parent="." unique_id=1441251757 instance=ExtResource("1_crmak")]
-position = Vector2(560, 300)
-
-[node name="Wheel" type="Sprite2D" parent="." unique_id=61263347]
-visible = false
-position = Vector2(560, 256)
-scale = Vector2(7.7656255, 6.5156255)
-texture = ExtResource("1_7kw7j")
-
-[node name="0x" type="Label" parent="Wheel" unique_id=1729034585]
-offset_left = 9.915491
-offset_top = 6.7529974
-offset_right = 27.915491
-offset_bottom = 29.752998
-scale = Vector2(0.2, 0.2)
-text = "0x"
-horizontal_alignment = 1
-
-[node name="2x" type="Label" parent="Wheel" unique_id=1203639252]
-offset_left = -8.241447
-offset_top = 11.05036
-offset_right = 9.758553
-offset_bottom = 34.05036
-scale = Vector2(0.2, 0.2)
-text = "2x"
-horizontal_alignment = 1
-
-[node name="2x2" type="Label" parent="Wheel" unique_id=1305607178]
-offset_left = 13.778669
-offset_top = 1.0743408
-offset_right = 31.77867
-offset_bottom = 24.074343
-scale = Vector2(0.2, 0.2)
-text = "2x"
-horizontal_alignment = 1
-
-[node name="2x3" type="Label" parent="Wheel" unique_id=546131099]
-offset_left = 3.2193155
-offset_top = -17.189445
-offset_right = 21.219315
-offset_bottom = 5.8105564
-scale = Vector2(0.2, 0.2)
-text = "2x"
-horizontal_alignment = 1
-
-[node name="2x4" type="Label" parent="Wheel" unique_id=1512313572]
-offset_left = -17.899395
-offset_top = -7.2134285
-offset_right = 0.10060501
-offset_bottom = 15.786573
-scale = Vector2(0.2, 0.2)
-text = "2x"
-horizontal_alignment = 1
-
-[node name="Item" type="Label" parent="Wheel" unique_id=1167284926]
-offset_left = -17.770622
-offset_top = 3.0695457
-offset_right = 18.229378
-offset_bottom = 26.069548
-scale = Vector2(0.2, 0.2)
-text = "Item"
-horizontal_alignment = 1
-
-[node name="Item2" type="Label" parent="Wheel" unique_id=1246621076]
-offset_left = 9.915491
-offset_top = -9.055154
-offset_right = 45.91549
-offset_bottom = 13.944848
-scale = Vector2(0.2, 0.2)
-text = "Item"
-horizontal_alignment = 1
-
-[node name="Item3" type="Label" parent="Wheel" unique_id=1079484325]
-offset_left = 0.90140724
-offset_top = 11.357315
-offset_right = 36.901405
-offset_bottom = 34.357315
-scale = Vector2(0.2, 0.2)
-text = "Item"
-horizontal_alignment = 1
-
-[node name="Item4" type="Label" parent="Wheel" unique_id=356306931]
-offset_left = -8.885312
-offset_top = -17.649878
-offset_right = 27.114689
-offset_bottom = 5.3501244
-scale = Vector2(0.2, 0.2)
-text = "Item"
-horizontal_alignment = 1
-
-[node name="_5x" type="Label" parent="Wheel" unique_id=391494092]
-offset_left = -14.937618
-offset_top = -14.119903
-offset_right = 25.062386
-offset_bottom = 8.880097
-scale = Vector2(0.2, 0.2)
-text = ".5x"
-
 [node name="CurrentMoney" type="Label" parent="." unique_id=529726828]
 offset_left = -11.0
 offset_top = 95.0
@@ -126,6 +28,7 @@ offset_right = 115.0
 offset_bottom = 139.0
 text = "Money: $100"
 horizontal_alignment = 1
+script = ExtResource("1_onut3")
 
 [node name="RoundMoney" type="Label" parent="." unique_id=1128745084]
 offset_left = 5.0
@@ -133,16 +36,18 @@ offset_top = 138.0
 offset_right = 174.0
 offset_bottom = 161.0
 text = "Money Earned: $0"
+script = ExtResource("2_08jof")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
 
-[node name="RoundNumber" type="Label" parent="." unique_id=1266490368]
-offset_left = 933.0
-offset_top = 98.0
-offset_right = 1104.0
-offset_bottom = 121.0
-text = "Round's Remaining 10"
+[node name="Round" type="Label" parent="." unique_id=1266490368]
+offset_left = 1022.0
+offset_top = 95.0
+offset_right = 1111.0
+offset_bottom = 118.0
+text = "Round 10"
+script = ExtResource("3_ce0ef")
 
 [node name="CurrentPlayer" type="Label" parent="." unique_id=726362810]
 offset_left = 411.0
