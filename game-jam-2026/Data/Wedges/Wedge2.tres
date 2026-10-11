@@ -10,5 +10,5 @@ Icon = ExtResource("1_vt0p8")
 Type = 7
 Amount = 0
 Weight = 0.2
-Color = Color(0.827451, 0.8156863, 0, 1)
+Color = Color(0.18431373, 0.37254903, 0.8156863, 1)
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

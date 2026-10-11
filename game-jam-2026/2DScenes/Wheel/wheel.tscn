@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://xcy8087uj0m8"]
 
+[ext_resource type="Script" uid="uid://c8kp1ciyon0ob" path="res://Scripts/Wheel/WheelShadow.cs" id="1_cntj0"]
 [ext_resource type="Script" uid="uid://bw8sfqjioe0ha" path="res://Scripts/Wheel/WheelRoot.cs" id="1_eod1k"]
 [ext_resource type="Script" uid="uid://5vsjxj4er8rr" path="res://Scripts/Wheel/Wheel.cs" id="2_c5ljd"]
 [ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="3_rguok"]
@@ -20,9 +21,26 @@
 [ext_resource type="AudioStream" uid="uid://dv55a3bakne4m" path="res://Audio/SFX/ButtonSelect.wav" id="15_6tf85"]
 [ext_resource type="StyleBox" uid="uid://b4csmfdsbqdmm" path="res://UI/Styles/Spin_Disabled.tres" id="15_mdv5u"]
 [ext_resource type="StyleBox" uid="uid://bfmelgsjo0g86" path="res://UI/Styles/Bank_Hover.tres" id="16_8330w"]
+[ext_resource type="PackedScene" uid="uid://jm587blkc6bo" path="res://UI/Scenes/SpinCost.tscn" id="17_5sa42"]
 [ext_resource type="StyleBox" uid="uid://dkasnjv6jeifh" path="res://UI/Styles/Bank_Disabled.tres" id="17_j3dfa"]
+[ext_resource type="PackedScene" uid="uid://cjdtk3y243uap" path="res://UI/Scenes/RoundMoney.tscn" id="22_cntj0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5sa42"]
+font = ExtResource("10_gumw0")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_j3x7l"]
+resource_local_to_scene = true
+font = ExtResource("10_gumw0")
+font_size = 32
+font_color = Color(1, 0.95686275, 0.8627451, 1)
 
 [node name="WheelBase" type="Node2D" unique_id=1083205891]
+
+[node name="WheelShadow" type="Node2D" parent="." unique_id=1251426410 node_paths=PackedStringArray("wheel")]
+script = ExtResource("1_cntj0")
+wheel = NodePath("../Wheel")
+Offset = Vector2(8, 10)
 
 [node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound")]
 script = ExtResource("2_c5ljd")
@@ -31,11 +49,12 @@ SpinTime = 6.755
 TickSound = NodePath("../WheelTick")
 customFont = ExtResource("10_gumw0")
 
-[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton")]
+[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton", "spinCost")]
 script = ExtResource("1_eod1k")
 wheel = NodePath("..")
 spinButton = NodePath("../../Spin")
 bankButton = NodePath("../../Bank Money")
+spinCost = NodePath("../../Spin/SpinCostLabel")
 
 [node name="WedgeFeedback" type="Node" parent="Wheel/WheelRoot" unique_id=1026609829 node_paths=PackedStringArray("spinButton", "bankButton")]
 script = ExtResource("14_nnn5j")
@@ -45,9 +64,9 @@ bankButton = NodePath("../../../Bank Money")
 [node name="Spin" type="Button" parent="." unique_id=1403386969 node_paths=PackedStringArray("audioPlayer")]
 custom_minimum_size = Vector2(128, 64)
 offset_left = -152.0
-offset_top = 232.0
+offset_top = 304.0
 offset_right = -24.0
-offset_bottom = 296.0
+offset_bottom = 368.0
 theme_override_fonts/font = ExtResource("10_gumw0")
 theme_override_styles/normal = ExtResource("10_idokj")
 theme_override_styles/pressed = ExtResource("11_nnn5j")
@@ -58,12 +77,20 @@ script = ExtResource("14_j3dfa")
 pressedSound = ExtResource("15_6tf85")
 audioPlayer = NodePath("../AudioStreamPlayer2D")
 
+[node name="SpinCostLabel" parent="Spin" unique_id=717428040 instance=ExtResource("17_5sa42")]
+layout_mode = 1
+offset_top = -39.0
+offset_right = 51.0
+offset_bottom = -39.0
+text = "Spin: $"
+label_settings = SubResource("LabelSettings_5sa42")
+
 [node name="Bank Money" type="Button" parent="." unique_id=1654285049 node_paths=PackedStringArray("audioPlayer")]
 custom_minimum_size = Vector2(128, 64)
 offset_left = 21.0
-offset_top = 232.0
+offset_top = 304.0
 offset_right = 149.0
-offset_bottom = 296.0
+offset_bottom = 368.0
 theme_override_fonts/font = ExtResource("10_gumw0")
 theme_override_styles/normal = ExtResource("12_ybl86")
 theme_override_styles/pressed = ExtResource("14_ij6kh")
@@ -75,9 +102,17 @@ script = ExtResource("14_j3dfa")
 pressedSound = ExtResource("15_6tf85")
 audioPlayer = NodePath("../AudioStreamPlayer2D")
 
+[node name="RoundPotLabel" parent="Bank Money" unique_id=106352326 instance=ExtResource("22_cntj0")]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -40.0
+offset_right = 139.0
+offset_bottom = 0.0
+label_settings = SubResource("LabelSettings_j3x7l")
+
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
-position = Vector2(-152, 34)
-rotation = 3.1415927
+position = Vector2(242, -150)
+rotation = -1.5707964
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-158, 36, -144, 36, -152, -64)
 uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)

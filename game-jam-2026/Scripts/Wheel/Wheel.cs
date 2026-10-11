@@ -29,6 +29,13 @@ public partial class Wheel : Node2D
     [Export] public Color CapInnerColor = new("2a1a3a");
     [Export] public Color CapShineColor = new(1, 1, 1, 0.35f);
 
+    // Wheel outline
+    [Export] public float RimWidth = 14f;
+    [Export] public Color RimColor = new("e8b84a");
+    [Export] public Color RimEdgeColor = new("a9782a");
+    [Export] public float PegRadius = 5f;
+    [Export] public Color PegColor = new("fff4dc");
+
     public override void _Ready()
     {
         rng.Randomize();
@@ -68,10 +75,15 @@ public partial class Wheel : Node2D
 
             float mid = (starts[i] + ends[i]) / 2f;
             DrawSetTransform(Vector2.FromAngle(mid) * Radius * 0.35f, mid, Vector2.One);
-            DrawString(customFont, new Vector2(-24, 6), Wedges[i].Label, HorizontalAlignment.Center, 96, 18);
-            mid = (starts[i] + ends[i]) / 2f;
+            Font font = ThemeDB.FallbackFont;
+            Vector2 labelPos = new Vector2(-24, 6);
+            int fontSize = 18;
+            int outlineSize = 5;
+
+            DrawStringOutline(font, labelPos, Wedges[i].Label, HorizontalAlignment.Center, 96, fontSize, outlineSize, GameColors.Ink);
+            DrawString(font, labelPos, Wedges[i].Label, HorizontalAlignment.Center, 96, fontSize, Wedges[i].Type == Wedge.WedgeType.Bust ? GameColors.BustText : GameColors.Cream);
             Vector2 center = Vector2.FromAngle(mid) * Radius * 0.8f;
-            float iconSize = 24f; 
+            float iconSize = 36f; 
 
             DrawSetTransform(center, mid, Vector2.One);
             DrawTextureRect(Wedges[i].Icon, new Rect2(-Vector2.One * iconSize / 2f, Vector2.One * iconSize), false, null, false);
@@ -79,19 +91,28 @@ public partial class Wheel : Node2D
             GD.Print("Drawing wedge ", i);
         }
         // Wedge Outline 
+        // Rim
+        float rimMid = Radius + RimWidth / 2f;
+        DrawArc(Vector2.Zero, rimMid, 0f, Mathf.Tau, 96, RimColor, RimWidth, true);
+
+        // Edges
+        DrawArc(Vector2.Zero, Radius, 0f, Mathf.Tau, 96, RimEdgeColor, 2f, true);
+        DrawArc(Vector2.Zero, Radius + RimWidth, 0f, Mathf.Tau, 96, RimEdgeColor, 2f, true);
+
+        // Pegs
         for (int i = 0; i < Wedges.Count; i++)
         {
-            Vector2 edge = Vector2.FromAngle(starts[i]) * Radius;
-            DrawLine(Vector2.Zero, edge, LineColor, LineWidth, true);
+            Vector2 pegPos = Vector2.FromAngle(starts[i]) * rimMid;
+            DrawCircle(pegPos, PegRadius + 1.5f, LineColor);
+            DrawCircle(pegPos, PegRadius, PegColor);
+            DrawCircle(pegPos + new Vector2(-1.5f, -1.5f), PegRadius * 0.35f, new Color(1, 1, 1, 0.6f));
         }
-        DrawArc(Vector2.Zero, Radius, 0f, Mathf.Tau, 64, LineColor, LineWidth, true);
 
         // Center cap
         DrawCircle(new Vector2(2, 3), CapRadius + 2f, new Color(0, 0, 0, 0.35f));
         DrawCircle(Vector2.Zero, CapRadius, CapRimColor);
         DrawCircle(Vector2.Zero, CapRadius * 0.7f, CapInnerColor);
-        DrawCircle(new Vector2(-CapRadius * 0.25f, -CapRadius * 0.25f),
-        CapRadius * 0.18f, CapShineColor);
+        DrawCircle(new Vector2(-CapRadius * 0.25f, -CapRadius * 0.25f), CapRadius * 0.18f, CapShineColor);
     }
 
     public void Spin()

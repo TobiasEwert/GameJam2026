@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
 [ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
 [ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
 [ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="13_qsmkw"]
@@ -35,6 +36,12 @@ Icon = ExtResource("5_w7uyn")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
+[sub_resource type="LabelSettings" id="LabelSettings_bgl7e"]
+resource_local_to_scene = true
+font = ExtResource("9_bgl7e")
+font_size = 32
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
 [node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheelRoot", "audioPlayer")]
 script = ExtResource("1_hfy5k")
 allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
@@ -59,6 +66,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("2_crmak")]
 position = Vector2(559, 365)
+
+[node name="RoundPotLabel" parent="WheelBase/Bank Money" parent_id_path=PackedInt32Array(1083205891, 1654285049) index="0" unique_id=106352326]
+label_settings = SubResource("LabelSettings_bgl7e")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
 stream = ExtResource("12_bgl7e")

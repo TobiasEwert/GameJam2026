@@ -11,6 +11,6 @@ Icon = ExtResource("1_144rv")
 Type = 3
 Amount = 0
 Weight = 0.1
-Color = Color(0.8784314, 0.4627451, 1, 1)
+Color = Color(0.5568628, 0.26666668, 0.6784314, 1)
 audio = ExtResource("2_t66xn")
 metadata/_custom_type_script = "uid://dktxdbn3dud04"
