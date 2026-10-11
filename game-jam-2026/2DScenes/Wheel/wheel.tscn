@@ -53,9 +53,10 @@ customFont = ExtResource("10_gumw0")
 Pointer = NodePath("../Pointer")
 KickDirection = 1.0
 
-[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton", "spinCost", "stockButton", "stockScreen")]
+[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "wheelNodes", "spinButton", "bankButton", "spinCost", "stockButton", "stockScreen")]
 script = ExtResource("1_eod1k")
 wheel = NodePath("..")
+wheelNodes = [NodePath("../../WheelShadow"), NodePath("../../Pointer")]
 spinButton = NodePath("../../Spin")
 bankButton = NodePath("../../Bank Money")
 spinCost = NodePath("../../Spin/SpinCostLabel")
@@ -145,10 +146,8 @@ stream = ExtResource("10_gquxa")
 anchors_preset = -1
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -425.93
-offset_top = 90.275
-offset_right = -425.93
-offset_bottom = 90.275
+offset_top = 27.075
+offset_bottom = 27.075
 grow_horizontal = 1
 grow_vertical = 1
 

@@ -2,6 +2,42 @@
 
 [ext_resource type="Script" uid="uid://br03svtinmfo1" path="res://Scripts/Stocks/StockScreen.cs" id="1_eslva"]
 [ext_resource type="Script" uid="uid://cw8m0fm14lbx2" path="res://Scripts/Stocks/StockGraph.cs" id="1_xdr8c"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="2_m4b8y"]
+[ext_resource type="StyleBox" uid="uid://d2x5b4u64uxre" path="res://UI/Styles/Spin_Normal.tres" id="4_4s2fq"]
+[ext_resource type="StyleBox" uid="uid://cxrnc0mb8kcpt" path="res://UI/Styles/Spin_Pressed.tres" id="5_loxrq"]
+[ext_resource type="StyleBox" uid="uid://b4q68bqxugj4j" path="res://UI/Styles/Spin_Hover.tres" id="6_ti3rv"]
+[ext_resource type="StyleBox" uid="uid://kp6p8yj8pqrs" path="res://UI/Styles/Bank_Normal.tres" id="7_gjqpx"]
+[ext_resource type="StyleBox" uid="uid://ccp1dbvum423e" path="res://UI/Styles/Bank_Pressed.tres" id="8_pxo0e"]
+[ext_resource type="StyleBox" uid="uid://bfmelgsjo0g86" path="res://UI/Styles/Bank_Hover.tres" id="9_frg1g"]
+[ext_resource type="StyleBox" uid="uid://dkasnjv6jeifh" path="res://UI/Styles/Bank_Disabled.tres" id="10_irmxn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjqpx"]
+bg_color = Color(0.16470589, 0.101960786, 0.22745098, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_gjqpx"]
+font = ExtResource("2_m4b8y")
+font_size = 40
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pxo0e"]
+font = ExtResource("2_m4b8y")
+font_size = 40
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_frg1g"]
+font = ExtResource("2_m4b8y")
+font_size = 40
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frg1g"]
+bg_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irmxn"]
+bg_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
 [node name="StockScreen" type="Control" unique_id=1593453877 node_paths=PackedStringArray("graph", "priceLabel", "ownedLabel", "previewLabel", "amountSlider", "buyButton", "sellButton", "closeButton")]
 visible = false
@@ -28,7 +64,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.60784316)
 
 [node name="PanelContainer" type="PanelContainer" parent="Dim" unique_id=314964644]
 layout_mode = 1
@@ -43,6 +78,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gjqpx")
 
 [node name="VBox" type="VBoxContainer" parent="Dim/PanelContainer" unique_id=1827619459]
 layout_mode = 2
@@ -51,37 +87,61 @@ layout_mode = 2
 layout_mode = 2
 text = "Stock Market
 "
+label_settings = SubResource("LabelSettings_gjqpx")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PriceLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=1524844753]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_pxo0e")
 
 [node name="StockGraph" type="Control" parent="Dim/PanelContainer/VBox" unique_id=213477674]
-custom_minimum_size = Vector2(400, 200)
+custom_minimum_size = Vector2(280, 140)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_xdr8c")
 
 [node name="OwnerLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=811797399]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_frg1g")
 
 [node name="AmountSlider" type="HSlider" parent="Dim/PanelContainer/VBox" unique_id=292340142]
 layout_mode = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_frg1g")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_irmxn")
 
 [node name="PreviewLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=1732372960]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Dim/PanelContainer/VBox" unique_id=358158213]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="BuyButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=634388594]
+custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("4_4s2fq")
+theme_override_styles/pressed = ExtResource("5_loxrq")
+theme_override_styles/hover = ExtResource("6_ti3rv")
+theme_override_styles/disabled = ExtResource("5_loxrq")
 text = "Buy
 "
 
 [node name="SellButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=1225323476]
+custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("7_gjqpx")
+theme_override_styles/pressed = ExtResource("8_pxo0e")
+theme_override_styles/hover = ExtResource("9_frg1g")
+theme_override_styles/disabled = ExtResource("10_irmxn")
 text = "SELL ALL"
 
 [node name="CloseButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=349176084]
+custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Close
 "

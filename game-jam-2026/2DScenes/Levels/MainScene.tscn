@@ -65,7 +65,7 @@ zoom = Vector2(0.91, 0.91)
 metadata/_edit_use_anchors_ = true
 
 [node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("2_crmak")]
-position = Vector2(559, 365)
+position = Vector2(558, 365)
 
 [node name="Spin" parent="WheelBase" index="2" unique_id=1403386969]
 metadata/_edit_use_anchors_ = true

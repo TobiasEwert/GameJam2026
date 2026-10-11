@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class StockScreen : Control
 {    
+    [Signal] public delegate void StockScreenOpenedEventHandler();
+    [Signal] public delegate void StockScreenClosedEventHandler();
     [Export] public StockGraph graph;
     [Export] public Label priceLabel;
     [Export] public Label ownedLabel;
@@ -17,6 +19,8 @@ public partial class StockScreen : Control
     public void Close()
     {
         Visible = false;
+        bIsOpen = false;
+        EmitSignal(nameof(StockScreenClosed));
         turnManager.currentState = TurnManager.TurnState.PlayerAction;
     }
 
@@ -56,6 +60,7 @@ public partial class StockScreen : Control
         {
             Visible = false;
             bIsOpen = false;
+            EmitSignal(nameof(StockScreenClosed));
             turnManager.currentState = TurnManager.TurnState.PlayerAction;
             return;
         }
@@ -65,6 +70,7 @@ public partial class StockScreen : Control
         }
         bIsOpen = true;
         Visible = true;
+        EmitSignal(nameof(StockScreenOpened));
         Refresh();
     }
 
