@@ -1,11 +1,14 @@
 // WheelRoot.cs
 using Godot;
 
+[GlobalClass]
 public partial class WheelRoot : Node2D
 {
+    [Signal] public delegate void RefreshAllButtonsEventHandler();
     [Export] Wheel wheel;
 	[Export] public Button spinButton;
 	[Export] public Button bankButton;
+	[Export] public Label spinCost;
     public TurnManager turnManager;
 
 
@@ -19,16 +22,16 @@ public partial class WheelRoot : Node2D
         turnManager.TurnStarted += OnTurnStarted;
         turnManager.StartGame();
         RefreshButtons();
+
     }
     public void RefreshButtons()
     {
+        EmitSignal(SignalName.RefreshAllButtons);
         spinButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
-        spinButton.Text = $"Spin: ${turnManager.nextSpinCost}";
         bankButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
     }
 	private void OnSpinButtonPressed()
 	{       
-        //TESTING, ADD TRY PAY SPIN AND REMOVE START GAME
         if(turnManager.TryPaySpin())
         {
 		    wheel.Spin();

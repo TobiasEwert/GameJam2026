@@ -22,4 +22,5 @@ public partial class Wedge : Resource
     [Export] public int Amount = 20;
     [Export] public float Weight = 1f;
     [Export] public Color Color = Colors.Green;
+	[Export] public AudioStream audio;
 }

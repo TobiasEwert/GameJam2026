@@ -27,8 +27,9 @@
 [node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound")]
 script = ExtResource("2_c5ljd")
 Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("7_5fvti"), ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j")])
-SpinTime = 5.31
+SpinTime = 6.755
 TickSound = NodePath("../WheelTick")
+customFont = ExtResource("10_gumw0")
 
 [node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton")]
 script = ExtResource("1_eod1k")
@@ -52,7 +53,7 @@ theme_override_styles/normal = ExtResource("10_idokj")
 theme_override_styles/pressed = ExtResource("11_nnn5j")
 theme_override_styles/hover = ExtResource("11_ybl86")
 theme_override_styles/disabled = ExtResource("15_mdv5u")
-text = "Spin: $"
+text = "Spin"
 script = ExtResource("14_j3dfa")
 pressedSound = ExtResource("15_6tf85")
 audioPlayer = NodePath("../AudioStreamPlayer2D")

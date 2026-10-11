@@ -28,6 +28,11 @@ public partial class CardObject2D : GridContainer
   }
   private void RebuildCardInventoryDisplay()
   {
+    if(activePlayer == null || activePlayer.abilityCards == null || _cardInventory == null)
+    {
+        return;
+    }
+    
     foreach (Node child in _cardInventory.GetChildren())
     {
       child.QueueFree();

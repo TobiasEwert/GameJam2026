@@ -9,18 +9,25 @@ public partial class MainGameLevel : Node2D
   [Export] public CardData [] allCards;
   [Export] public Control gameOverScreen;
   [Export] public Control [] mainGameUI;
-  [Export] public Node2D wheel;
+  [Export] public WheelRoot wheelRoot;
+  [Export] public AudioStreamPlayer2D backgroundMusicPlayer;
   [Export] public AudioStreamMP3 gameOverMusic;
   [Export] public AudioStreamPlayer2D audioPlayer;
+  [Export] public Label spinCost;
 
   public override void _Ready()
   {
-    //_PlayerName = GetNode<Label>("PlayerName");
     _Turn = TurnManager.Instance;
     _Turn.possibleCards = allCards;
     _Turn.GameEnded += OnGameEnded;
+    spinCost.Text = $"Spin Cost: ${_Turn.nextSpinCost}";
     gameOverScreen.Visible = false;
-    // _Turn.StartGame();
+    wheelRoot.RefreshAllButtons += OnRefreshButtons;
+  }
+
+  private void OnRefreshButtons()
+  {
+    spinCost.Text = $"Spin Cost: ${_Turn.nextSpinCost}";
   }
 
   public void MainLevelUIController(bool visible)
@@ -29,8 +36,11 @@ public partial class MainGameLevel : Node2D
     {
       uiElement.Visible = visible;
     }
-    wheel.Visible = visible;
+    wheelRoot.Visible = visible;
+    ((Node2D)wheelRoot.GetParent().GetParent()).Visible = visible;
   }
+
+
 
   private void OnGameEnded(int winnerIndex)
   {

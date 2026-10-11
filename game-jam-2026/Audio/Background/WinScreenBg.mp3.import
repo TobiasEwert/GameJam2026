@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/WinScreenBg.mp3-2518fbd6b0bb9764b2ebbb08f9fae
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
