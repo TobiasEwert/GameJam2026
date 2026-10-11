@@ -12,6 +12,6 @@ offset_left = 17.0
 offset_top = 91.0
 offset_right = 315.0
 offset_bottom = 135.0
-text = "Stock: X Shares"
+text = "Shares: 0"
 label_settings = SubResource("LabelSettings_du5vk")
 horizontal_alignment = 1

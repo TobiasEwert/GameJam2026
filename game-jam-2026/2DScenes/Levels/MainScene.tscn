@@ -83,4 +83,7 @@ offset_top = 52.0
 offset_right = 1106.0
 offset_bottom = 224.0
 
+[connection signal="pressed" from="WheelBase/Stock" to="WheelBase/StockScreen/Dim/PanelContainer/VBox/StockGraph" method="_on_stock_pressed"]
+
 [editable path="WheelBase"]
+[editable path="WheelBase/StockScreen"]

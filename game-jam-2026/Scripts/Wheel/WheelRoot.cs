@@ -5,17 +5,18 @@ using Godot;
 public partial class WheelRoot : Node2D
 {
     [Signal] public delegate void RefreshAllButtonsEventHandler();
+
     [Export] Wheel wheel;
 	[Export] public Button spinButton;
 	[Export] public Button bankButton;
 	[Export] public Label spinCost;
+    [Export] public Button stockButton;
+    [Export] public StockScreen stockScreen;
     public TurnManager turnManager;
 
     Color freeSpin = new Color("#3FBF5F");
     Color paidSpin = new Color("#FFF4DC");
     Color tooExpensive = new Color("#FF4D4D");
-
-	//this.LabelSettings.FontColor = finalRound;
 
     public override void _Ready()
     {
@@ -55,6 +56,17 @@ public partial class WheelRoot : Node2D
         {
             bankButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
         }
+
+        if(stockButton != null)
+        {
+            stockButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
+        }
+        if(stockScreen != null)
+        {
+            stockScreen.Visible = false;
+            stockScreen.bIsOpen = false;
+        }
+
     }
 	private void OnSpinButtonPressed()
 	{       

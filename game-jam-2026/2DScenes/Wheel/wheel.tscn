@@ -24,12 +24,14 @@
 [ext_resource type="PackedScene" uid="uid://jm587blkc6bo" path="res://UI/Scenes/SpinCost.tscn" id="17_5sa42"]
 [ext_resource type="StyleBox" uid="uid://dkasnjv6jeifh" path="res://UI/Styles/Bank_Disabled.tres" id="17_j3dfa"]
 [ext_resource type="PackedScene" uid="uid://cjdtk3y243uap" path="res://UI/Scenes/RoundMoney.tscn" id="22_cntj0"]
+[ext_resource type="Script" uid="uid://dxsc1cgprge3c" path="res://Scripts/UI/StockButton.cs" id="25_0utv3"]
+[ext_resource type="PackedScene" uid="uid://dh7vowkvnikym" path="res://2DScenes/Stock/StockGraph.tscn" id="26_n5qxa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5sa42"]
 font = ExtResource("10_gumw0")
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_cntj0"]
+[sub_resource type="LabelSettings" id="LabelSettings_1qf15"]
 resource_local_to_scene = true
 font = ExtResource("10_gumw0")
 font_size = 32
@@ -49,12 +51,14 @@ SpinTime = 6.755
 TickSound = NodePath("../WheelTick")
 customFont = ExtResource("10_gumw0")
 
-[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton", "spinCost")]
+[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton", "spinCost", "stockButton", "stockScreen")]
 script = ExtResource("1_eod1k")
 wheel = NodePath("..")
 spinButton = NodePath("../../Spin")
 bankButton = NodePath("../../Bank Money")
 spinCost = NodePath("../../Spin/SpinCostLabel")
+stockButton = NodePath("../../Stock")
+stockScreen = NodePath("../../StockScreen")
 
 [node name="WedgeFeedback" type="Node" parent="Wheel/WheelRoot" unique_id=1026609829 node_paths=PackedStringArray("spinButton", "bankButton")]
 script = ExtResource("14_nnn5j")
@@ -108,7 +112,7 @@ offset_left = 5.0
 offset_top = -40.0
 offset_right = 139.0
 offset_bottom = 0.0
-label_settings = SubResource("LabelSettings_cntj0")
+label_settings = SubResource("LabelSettings_1qf15")
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
 position = Vector2(242, -150)
@@ -121,3 +125,32 @@ uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)
 stream = ExtResource("10_gquxa")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=686395921]
+
+[node name="Stock" type="Button" parent="." unique_id=1570434061]
+custom_minimum_size = Vector2(128, 64)
+offset_left = -330.0
+offset_top = 305.0
+offset_right = -202.0
+offset_bottom = 369.0
+theme_override_fonts/font = ExtResource("10_gumw0")
+theme_override_styles/normal = ExtResource("10_idokj")
+theme_override_styles/pressed = ExtResource("11_nnn5j")
+theme_override_styles/hover = ExtResource("11_ybl86")
+theme_override_styles/disabled = ExtResource("15_mdv5u")
+text = "Stocks"
+script = ExtResource("25_0utv3")
+
+[node name="StockScreen" parent="." unique_id=1593453877 instance=ExtResource("26_n5qxa")]
+anchors_preset = -1
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -425.93
+offset_top = 90.275
+offset_right = -425.93
+offset_bottom = 90.275
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="pressed" from="Stock" to="StockScreen" method="Open"]
+
+[editable path="StockScreen"]

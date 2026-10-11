@@ -79,7 +79,7 @@ text = "Buy
 
 [node name="SellButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=1225323476]
 layout_mode = 2
-text = "Sell"
+text = "SELL ALL"
 
 [node name="CloseButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=349176084]
 layout_mode = 2
