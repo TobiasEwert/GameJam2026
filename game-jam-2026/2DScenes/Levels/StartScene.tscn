@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bgco287ilivdx"]
+
+[ext_resource type="Script" uid="uid://bmav3t33brgq1" path="res://Scripts/UI/StartMenu.cs" id="1_670oc"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="2_luet2"]
+[ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="3_n51jw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l0bqs"]
+font = ExtResource("2_luet2")
+font_size = 60
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lr00t"]
+
+[node name="Control" type="Control" unique_id=1642106543]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_670oc")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=143695939]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 1.0
+offset_right = 0.30395508
+offset_bottom = -3.0
+
+[node name="Label" type="Label" parent="TextureRect" unique_id=2048565711]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24800001
+anchor_top = 0.127
+anchor_right = 0.721
+anchor_bottom = 0.4
+offset_left = -0.2000122
+offset_top = 0.084999084
+offset_right = -0.15002441
+text = "Game Name"
+label_settings = SubResource("LabelSettings_l0bqs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=1791579108]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.407
+anchor_top = 0.47300002
+anchor_right = 0.551
+anchor_bottom = 0.61200005
+offset_left = -0.05001831
+offset_top = -0.08502197
+offset_right = 0.3499756
+offset_bottom = 0.25997925
+theme_override_fonts/font = ExtResource("2_luet2")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lr00t")
+text = "Play"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1342943703]
+stream = ExtResource("3_n51jw")
+autoplay = true
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="StartButtonPressed"]
