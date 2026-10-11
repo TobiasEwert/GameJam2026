@@ -7,10 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_a8fvf"]
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
 [ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
+[ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
 [ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="6_qsmkw"]
 [ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="7_qsmkw"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
-[ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
+[ext_resource type="AudioStream" uid="uid://bjltibwkr746s" path="res://Audio/Background/BackgroundMusic.mp3" id="10_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="13_qsmkw"]
 
@@ -37,7 +38,7 @@ Icon = ExtResource("5_w7uyn")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
-[sub_resource type="LabelSettings" id="LabelSettings_qsmkw"]
+[sub_resource type="LabelSettings" id="LabelSettings_bgl7e"]
 resource_local_to_scene = true
 font = ExtResource("9_bgl7e")
 font_size = 32
@@ -57,7 +58,6 @@ offset_left = -78.0
 offset_top = 52.0
 offset_right = 1187.0
 offset_bottom = 760.0
-texture = ExtResource("7_qsmkw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
@@ -100,7 +100,7 @@ offset_bottom = 387.0
 metadata/_edit_use_anchors_ = true
 
 [node name="RoundPotLabel" parent="WheelBase/Bank Money" index="0" unique_id=106352326]
-label_settings = SubResource("LabelSettings_qsmkw")
+label_settings = SubResource("LabelSettings_bgl7e")
 metadata/_edit_use_anchors_ = true
 
 [node name="Pointer" parent="WheelBase" index="5" unique_id=68424672]
@@ -113,7 +113,7 @@ offset_right = -275.875
 offset_bottom = 62.775
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
-stream = ExtResource("12_bgl7e")
+stream = ExtResource("10_bgl7e")
 autoplay = true
 
 [node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("13_qsmkw")]
