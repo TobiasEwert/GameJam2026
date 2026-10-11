@@ -39,7 +39,7 @@ public partial class CardObject2D : GridContainer
     }
 
      for (int i = 0; i < activePlayer.abilityCards.Count; i++)
-    {
+     {
       var cardData = activePlayer.abilityCards[i];
       var btn = new Button();
       btn.Icon = cardData.Icon;
@@ -50,7 +50,7 @@ public partial class CardObject2D : GridContainer
       int index = i;                       
       btn.Pressed += () => _on_button_pressed(index);
       _cardInventory.AddChild(btn);
-  }
+     }
 }
   public void _on_button_pressed(int index)
   {
@@ -66,9 +66,17 @@ public partial class CardObject2D : GridContainer
     switch (index)
     {
       case 0:
+	    ActivateIncreaseNextSpin();
         break;
       case 1:
+	    ActivateRandomOpponentCard();
         break;
+	  case 2:
+	    ActivateViewOpponentCard();
+		break;
+	  case 3:
+	    ActivateOpponentBet();
+		break;
       default:
         GD.Print("Invalid card index");
         break;
@@ -82,5 +90,93 @@ public partial class CardObject2D : GridContainer
 			audioPlayer.Play();
       RebuildCardInventoryDisplay();
     } 
+  }
+  
+  private void ActivateIncreaseNextSpin()
+  {
+	_Turn.nextSpinWinningsMultiplier = 2;
+	ShowPopup(
+		$"{activePlayer.playerName} activated Increase Winnings!\n" +
+		"The next spin will pay 2x"
+	);
+  }
+
+  private void ActivateRandomOpponentCard()
+  {
+	PlayerData opponent = GetOpponent();
+	if(opponent == null)
+		return;
+	if(opponent.abilityCards.Count == 0)
+	{
+		ShowPopup("Opponent has no cards to steal.");
+		return;
+	}
+	if(activePlayer.abilityCards.Count >= 4)
+	{
+		ShowPopup("Your card collection is full.");
+		return;
+	}
+	
+	RandomNumberGenerator rng = new RandomNumberGenerator();
+	rng.Randomize();
+	
+	int randomIndex =
+		rng.RandiRange(0, opponent.abilityCards.Count - 1);
+		
+	CardData stolenCard = opponent.abilityCards[randomIndex];
+	
+	opponent.abilityCards.RemoveAt(randomIndex);
+	activePlayer.abilityCards.Add(stolenCard);
+	ShowPopup(
+		$"{activePlayer.playerName} stole a random card!\n" +
+		$"Card {stolenCard.CardName}"
+	);
+	RebuildCardInventoryDisplay();
+  }
+
+  private PlayerData GetOpponent()
+  {
+	if(_Turn.players == null || _Turn.players.Length < 2)
+		return null;
+	
+	int opponentIndex = (_Turn.currentPlayerIndex + 1) % _Turn.players.Length;
+	return _Turn.players[opponentIndex];
+  }
+
+  private void ActivateViewOpponentCard()
+  {
+	PlayerData opponent = GetOpponent();
+	if(opponent == null)
+		return;
+		
+	if(opponent.abilityCards.Count == 0)
+	{
+		ShowPopup("Opponent has no cards.");
+		return;
+	}
+	RandomNumberGenerator rng = new RandomNumberGenerator();
+	rng.Randomize();
+	int randomIndex =
+		rng.RandiRange(0, opponent.abilityCards.Count - 1);
+	CardData card = opponent.abilityCards[randomIndex];
+	ShowPopup(
+		$"Opponent card:\n\n" +
+		$"{card.CardName}\n" +
+		$"{card.Description}"
+	);
+  }
+
+  private void ActivateOpponentBet()
+  {
+	PlayerData opponent = GetOpponent();
+	if(opponent == null)
+		return;
+
+	ShowPopup($"{activePlayer.playerName} used Opponent Bet!");
+  }
+
+  private void ShowPopup(string message)
+  {
+	_Turn.EmitSignal(TurnManager.SignalName.PopupMessage, message);
   }
 }
