@@ -48,6 +48,7 @@ public partial class TurnManager : Node
 		stockInstance = Stock.Instance;
 		maxRounds = gameConfig.maxRounds;
 		startingSpinCost = gameConfig.baseSpinCost;
+		players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; 
 	}
 	
 	// Initial setup for the game, starts once the start game button is triggered, can also have the UI transition end call StartTurn
@@ -56,7 +57,6 @@ public partial class TurnManager : Node
 		currentState = TurnState.StartGame;
 		currentPlayerIndex = 0;
 		currentRound = maxRounds;
-		players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; // hardset the names
 		EmitSignal(SignalName.GameStarted);
 		EmitSignal(SignalName.RoundChanged, currentRound);
 		StartTurn();

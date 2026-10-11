@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dnp8ircvg4cgs"]
+
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="1_no6q6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_du5vk"]
+font = ExtResource("1_no6q6")
+font_size = 24
+font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
+
+[node name="TurnLabel" type="Label" unique_id=772514501]
+offset_right = 298.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 12
+text = "Your Turn"
+label_settings = SubResource("LabelSettings_du5vk")
+horizontal_alignment = 1
+vertical_alignment = 1

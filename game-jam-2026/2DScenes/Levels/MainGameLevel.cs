@@ -13,21 +13,18 @@ public partial class MainGameLevel : Node2D
   [Export] public AudioStreamPlayer2D backgroundMusicPlayer;
   [Export] public AudioStreamMP3 gameOverMusic;
   [Export] public AudioStreamPlayer2D audioPlayer;
-  [Export] public Label spinCost;
 
-  public override void _Ready()
+  public override async void _Ready()
   {
     _Turn = TurnManager.Instance;
     _Turn.possibleCards = allCards;
     _Turn.GameEnded += OnGameEnded;
-    spinCost.Text = $"Spin Cost: ${_Turn.nextSpinCost}";
     gameOverScreen.Visible = false;
     wheelRoot.RefreshAllButtons += OnRefreshButtons;
   }
 
   private void OnRefreshButtons()
   {
-    spinCost.Text = $"Spin Cost: ${_Turn.nextSpinCost}";
   }
 
   public void MainLevelUIController(bool visible)
