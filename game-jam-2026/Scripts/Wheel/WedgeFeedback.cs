@@ -57,10 +57,7 @@ public partial class WedgeFeedback : Node
 	{
 		// ui/vfx
 		//At The end
-		TurnManager.Instance.EmitSignal(
-			TurnManager.SignalName.PopupMessage,
-			$"{TurnManager.Instance.currentPlayer.playerName}'s TURN\n\n{message}"
-		);
+		GD.Print("Popup message: ", message);
 		spinButton.Disabled = false;
 		bankButton.Disabled = false;
 	}

@@ -109,10 +109,6 @@ public partial class WheelRoot : Node2D
 	private void OnSpinFinished(Wedge wedge)
 	{
         GD.Print("Spin finished with wedge: ", wedge.Type);
-		turnManager.EmitSignal(
-            TurnManager.SignalName.PopupMessage,
-            $"{turnManager.currentPlayer.playerName}'s TURN\n\nSpin Result: {wedge.Type}"
-        );
 		TurnManager.Instance.WedgeAction(wedge);
         RefreshButtons();
 	}
