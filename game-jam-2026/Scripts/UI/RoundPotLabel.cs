@@ -4,6 +4,9 @@ using System;
 public partial class RoundPotLabel : Label
 {
 	public TurnManager turnManager;
+	Color positivePot = new Color("#3FBF5F");
+    Color zeroPot = new Color("#fff4dc");
+    Color negativePot = new Color("#FF4D4D");
 	public override void _Ready()
 	{
 		turnManager = TurnManager.Instance;
@@ -13,7 +16,19 @@ public partial class RoundPotLabel : Label
 
 	private void OnRoundPotChanged(int playerIndex, int potAmount)
 	{
-		this.Text = $"Round Pot:${potAmount}";
+		this.Text = $"Pot: ${potAmount}";
+		if(potAmount > 0)
+		{
+			this.LabelSettings.FontColor = positivePot;
+		}
+		else if(potAmount == 0)
+		{
+			this.LabelSettings.FontColor = zeroPot;
+		}
+		else
+		{
+			this.LabelSettings.FontColor = negativePot;
+		}
 	}
 	private void OnTurnStarted(int playerIndex)
 	{
