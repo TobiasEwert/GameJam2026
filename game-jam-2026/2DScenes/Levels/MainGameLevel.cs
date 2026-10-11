@@ -21,6 +21,7 @@ public partial class MainGameLevel : Node2D
     _Turn = TurnManager.Instance;
     _Turn.possibleCards = allCards;
     _Turn.GameEnded += OnGameEnded;
+    _Turn.PopupMessage += OnPopupMessage;
     gameOverScreen.Visible = false;
     wheelRoot.RefreshAllButtons += OnRefreshButtons;
 
