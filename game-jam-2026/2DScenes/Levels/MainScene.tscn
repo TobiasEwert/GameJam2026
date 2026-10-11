@@ -2,31 +2,31 @@
 
 [ext_resource type="Script" uid="uid://cuhsiqa5supx2" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_hfy5k"]
 [ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
-[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="2_qm2ls"]
+[ext_resource type="Texture2D" uid="uid://dyvgx21dgogrf" path="res://Art/Stages/PushYourLuck_Card1.png" id="2_euts4"]
 [ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="3_qsmkw"]
-[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_a8fvf"]
+[ext_resource type="Texture2D" uid="uid://dc2a6ryva4yig" path="res://Art/Stages/PushYourLuck_Card2.png" id="4_12uyl"]
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
-[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
-[ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
+[ext_resource type="Texture2D" uid="uid://cu8ojt07nsqlw" path="res://Art/Stages/PushYourLuck_Card3.png" id="5_qm2ls"]
+[ext_resource type="Texture2D" uid="uid://cxjbwttbkkbfj" path="res://Art/Stages/PushYourLuck_Card4.png" id="6_a8fvf"]
 [ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="6_qsmkw"]
 [ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="7_qsmkw"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
-[ext_resource type="AudioStream" uid="uid://bjltibwkr746s" path="res://Audio/Background/BackgroundMusic.mp3" id="10_bgl7e"]
+[ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="13_qsmkw"]
 
 [sub_resource type="Resource" id="Resource_y8rvs"]
 script = ExtResource("3_qsmkw")
-CardName = "TEST 1"
+CardName = "Seeker"
 Description = "TEST 1"
-Icon = ExtResource("2_qm2ls")
+Icon = ExtResource("2_euts4")
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_u1ot7"]
 script = ExtResource("3_qsmkw")
 CardName = "TEST 2"
 Description = "TEST 2"
-Icon = ExtResource("4_a8fvf")
+Icon = ExtResource("4_12uyl")
 ActionId = 1
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
@@ -34,11 +34,16 @@ metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 script = ExtResource("3_qsmkw")
 CardName = "TEST 3"
 Description = "TEST 3"
-Icon = ExtResource("5_w7uyn")
+Icon = ExtResource("5_qm2ls")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
-[sub_resource type="LabelSettings" id="LabelSettings_bgl7e"]
+[sub_resource type="Resource" id="Resource_wo86d"]
+script = ExtResource("3_qsmkw")
+Icon = ExtResource("6_a8fvf")
+metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+
+[sub_resource type="LabelSettings" id="LabelSettings_euts4"]
 resource_local_to_scene = true
 font = ExtResource("9_bgl7e")
 font_size = 32
@@ -46,7 +51,7 @@ font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheelRoot", "audioPlayer")]
 script = ExtResource("1_hfy5k")
-allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
+allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol"), SubResource("Resource_wo86d")])
 gameOverScreen = NodePath("GameOverControl")
 mainGameUI = [NodePath("Cards"), NodePath("HUD"), NodePath("Background")]
 wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
@@ -58,12 +63,17 @@ offset_left = -78.0
 offset_top = 52.0
 offset_right = 1187.0
 offset_bottom = 760.0
+texture = ExtResource("7_qsmkw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
 zoom = Vector2(0.91, 0.91)
 
 [node name="Cards" parent="." unique_id=1779756376 instance=ExtResource("5_ce0ef")]
+offset_left = 44.0
+offset_top = 225.0
+offset_right = 299.0
+offset_bottom = 500.0
 metadata/_edit_use_anchors_ = true
 
 [node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("2_crmak")]
@@ -100,7 +110,7 @@ offset_bottom = 387.0
 metadata/_edit_use_anchors_ = true
 
 [node name="RoundPotLabel" parent="WheelBase/Bank Money" index="0" unique_id=106352326]
-label_settings = SubResource("LabelSettings_bgl7e")
+label_settings = SubResource("LabelSettings_euts4")
 metadata/_edit_use_anchors_ = true
 
 [node name="Pointer" parent="WheelBase" index="5" unique_id=68424672]
@@ -113,7 +123,7 @@ offset_right = -275.875
 offset_bottom = 62.775
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
-stream = ExtResource("10_bgl7e")
+stream = ExtResource("12_bgl7e")
 autoplay = true
 
 [node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("13_qsmkw")]
