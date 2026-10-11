@@ -127,7 +127,10 @@ stream = ExtResource("12_bgl7e")
 autoplay = true
 
 [node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("13_qsmkw")]
-visible = false
+offset_left = 569.0
+offset_top = 405.0
+offset_right = 569.0
+offset_bottom = 405.0
 
 [node name="HUD" parent="." unique_id=1905705143 instance=ExtResource("12_qsmkw")]
 offset_left = 1.0
