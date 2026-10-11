@@ -1,76 +1,88 @@
 [gd_scene format=3 uid="uid://xcy8087uj0m8"]
 
-[ext_resource type="Script" uid="uid://cuhsiqa5supx2" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_s6k8u"]
-[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="2_idokj"]
-[ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="3_ybl86"]
-[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_nnn5j"]
-[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_ij6kh"]
-[ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_mdv5u"]
-[ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="7_2p2tj"]
-[ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="8_8330w"]
-[ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="9_j3dfa"]
-[ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="10_6tf85"]
-[ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="11_gumw0"]
+[ext_resource type="Script" uid="uid://bw8sfqjioe0ha" path="res://Scripts/Wheel/WheelRoot.cs" id="1_eod1k"]
+[ext_resource type="Script" uid="uid://5vsjxj4er8rr" path="res://Scripts/Wheel/Wheel.cs" id="2_c5ljd"]
+[ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="3_rguok"]
+[ext_resource type="Resource" uid="uid://ba5v3njs874nt" path="res://Data/Wedges/Wedge1.tres" id="4_eod1k"]
+[ext_resource type="Resource" uid="uid://b7q1vfvyre2tx" path="res://Data/Wedges/Wedge2.tres" id="5_ybl86"]
+[ext_resource type="Resource" uid="uid://cpvj4yquhi4vy" path="res://Data/Wedges/Wedge3.tres" id="6_nnn5j"]
+[ext_resource type="Resource" uid="uid://bdpb0t56rl0n6" path="res://Data/Wedges/Wedge5.tres" id="7_5fvti"]
+[ext_resource type="Resource" uid="uid://diukdc25l21t6" path="res://Data/Wedges/Wedge4.tres" id="9_2p2tj"]
+[ext_resource type="AudioStream" uid="uid://wkd7b5v1a6l6" path="res://Audio/SFX/WheelTick.mp3" id="10_gquxa"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="10_gumw0"]
+[ext_resource type="StyleBox" uid="uid://d2x5b4u64uxre" path="res://UI/Styles/Spin_Normal.tres" id="10_idokj"]
+[ext_resource type="StyleBox" uid="uid://cxrnc0mb8kcpt" path="res://UI/Styles/Spin_Pressed.tres" id="11_nnn5j"]
+[ext_resource type="StyleBox" uid="uid://b4q68bqxugj4j" path="res://UI/Styles/Spin_Hover.tres" id="11_ybl86"]
+[ext_resource type="StyleBox" uid="uid://kp6p8yj8pqrs" path="res://UI/Styles/Bank_Normal.tres" id="12_ybl86"]
+[ext_resource type="StyleBox" uid="uid://ccp1dbvum423e" path="res://UI/Styles/Bank_Pressed.tres" id="14_ij6kh"]
+[ext_resource type="Script" uid="uid://b6w7i4gc6yl3h" path="res://Scripts/UI/ButtonSFX.cs" id="14_j3dfa"]
+[ext_resource type="Script" uid="uid://dktwrndgyocx" path="res://Scripts/Wheel/WedgeFeedback.cs" id="14_nnn5j"]
+[ext_resource type="AudioStream" uid="uid://dv55a3bakne4m" path="res://Audio/SFX/ButtonSelect.wav" id="15_6tf85"]
+[ext_resource type="StyleBox" uid="uid://b4csmfdsbqdmm" path="res://UI/Styles/Spin_Disabled.tres" id="15_mdv5u"]
+[ext_resource type="StyleBox" uid="uid://bfmelgsjo0g86" path="res://UI/Styles/Bank_Hover.tres" id="16_8330w"]
+[ext_resource type="StyleBox" uid="uid://dkasnjv6jeifh" path="res://UI/Styles/Bank_Disabled.tres" id="17_j3dfa"]
 
-[sub_resource type="Resource" id="Resource_y8rvs"]
-script = ExtResource("3_ybl86")
-CardName = "TEST 1"
-Description = "TEST 1"
-Icon = ExtResource("2_idokj")
-metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+[node name="WheelBase" type="Node2D" unique_id=1083205891]
 
-[sub_resource type="Resource" id="Resource_u1ot7"]
-script = ExtResource("3_ybl86")
-CardName = "TEST 2"
-Description = "TEST 2"
-Icon = ExtResource("4_nnn5j")
-ActionId = 1
-metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+[node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound")]
+script = ExtResource("2_c5ljd")
+Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("7_5fvti"), ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j")])
+SpinTime = 6.755
+TickSound = NodePath("../WheelTick")
+customFont = ExtResource("10_gumw0")
 
-[sub_resource type="Resource" id="Resource_nt8ol"]
-script = ExtResource("3_ybl86")
-CardName = "TEST 3"
-Description = "TEST 3"
-Icon = ExtResource("5_ij6kh")
-ActionId = 2
-metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
+[node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton")]
+script = ExtResource("1_eod1k")
+wheel = NodePath("..")
+spinButton = NodePath("../../Spin")
+bankButton = NodePath("../../Bank Money")
 
-[node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheelRoot", "audioPlayer")]
-script = ExtResource("1_s6k8u")
-allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
-gameOverScreen = NodePath("GameOverControl")
-mainGameUI = [NodePath("Cards"), NodePath("HUD")]
-wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
-gameOverMusic = ExtResource("6_mdv5u")
-audioPlayer = NodePath("AudioStreamPlayer2D")
+[node name="WedgeFeedback" type="Node" parent="Wheel/WheelRoot" unique_id=1026609829 node_paths=PackedStringArray("spinButton", "bankButton")]
+script = ExtResource("14_nnn5j")
+spinButton = NodePath("../../../Spin")
+bankButton = NodePath("../../../Bank Money")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
-offset_left = 759.0
-offset_top = 308.0
-offset_right = 1913.0
-offset_bottom = 958.0
+[node name="Spin" type="Button" parent="." unique_id=1403386969 node_paths=PackedStringArray("audioPlayer")]
+custom_minimum_size = Vector2(128, 64)
+offset_left = -152.0
+offset_top = 232.0
+offset_right = -24.0
+offset_bottom = 296.0
+theme_override_fonts/font = ExtResource("10_gumw0")
+theme_override_styles/normal = ExtResource("10_idokj")
+theme_override_styles/pressed = ExtResource("11_nnn5j")
+theme_override_styles/hover = ExtResource("11_ybl86")
+theme_override_styles/disabled = ExtResource("15_mdv5u")
+text = "Spin"
+script = ExtResource("14_j3dfa")
+pressedSound = ExtResource("15_6tf85")
+audioPlayer = NodePath("../AudioStreamPlayer2D")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
-position = Vector2(552, 404)
-zoom = Vector2(0.91, 0.91)
+[node name="Bank Money" type="Button" parent="." unique_id=1654285049 node_paths=PackedStringArray("audioPlayer")]
+custom_minimum_size = Vector2(128, 64)
+offset_left = 21.0
+offset_top = 232.0
+offset_right = 149.0
+offset_bottom = 296.0
+theme_override_fonts/font = ExtResource("10_gumw0")
+theme_override_styles/normal = ExtResource("12_ybl86")
+theme_override_styles/pressed = ExtResource("14_ij6kh")
+theme_override_styles/hover = ExtResource("16_8330w")
+theme_override_styles/disabled = ExtResource("17_j3dfa")
+text = "Bank Money
+"
+script = ExtResource("14_j3dfa")
+pressedSound = ExtResource("15_6tf85")
+audioPlayer = NodePath("../AudioStreamPlayer2D")
 
-[node name="Cards" parent="." unique_id=1779756376 instance=ExtResource("7_2p2tj")]
-metadata/_edit_use_anchors_ = true
+[node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
+position = Vector2(-152, 34)
+rotation = 3.1415927
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-158, 36, -144, 36, -152, -64)
+uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)
 
-[node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("11_gumw0")]
-position = Vector2(559, 365)
+[node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=441105140]
+stream = ExtResource("10_gquxa")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
-stream = ExtResource("8_8330w")
-autoplay = true
-
-[node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("9_j3dfa")]
-visible = false
-
-[node name="HUD" parent="." unique_id=1905705143 instance=ExtResource("10_6tf85")]
-offset_left = 1.0
-offset_top = 52.0
-offset_right = 1106.0
-offset_bottom = 224.0
-
-[editable path="WheelBase"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=686395921]

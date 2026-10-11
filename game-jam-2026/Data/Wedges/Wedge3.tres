@@ -8,7 +8,7 @@
 script = ExtResource("2_wuuew")
 Label = "$200"
 Icon = ExtResource("1_shmiu")
-Amount = 200
+Amount = -1000
 Weight = 0.3
 audio = ExtResource("2_uolmn")
 metadata/_custom_type_script = "uid://dktxdbn3dud04"
