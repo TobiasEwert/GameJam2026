@@ -1,11 +1,19 @@
 [gd_scene format=3 uid="uid://cjdtk3y243uap"]
 
 [ext_resource type="Script" uid="uid://cw1ox3hffqx8y" path="res://Scripts/UI/RoundPotLabel.cs" id="1_bxsvx"]
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="1_h275s"]
 
-[node name="RoundMoney" type="Label" unique_id=359219422]
-offset_left = 5.0
-offset_top = 138.0
-offset_right = 174.0
-offset_bottom = 161.0
-text = "Money Earned: $0"
+[sub_resource type="LabelSettings" id="LabelSettings_h275s"]
+resource_local_to_scene = true
+font = ExtResource("1_h275s")
+font_size = 40
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
+[node name="RoundPotLabel" type="Label" unique_id=106352326]
+offset_left = 100.0
+offset_top = -3.0
+offset_right = 165.0
+offset_bottom = 37.0
+text = "Pot: $0"
+label_settings = SubResource("LabelSettings_h275s")
 script = ExtResource("1_bxsvx")

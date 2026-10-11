@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ptd6np0xxks6"]
+
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="1_e535l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_du5vk"]
+font = ExtResource("1_e535l")
+font_size = 40
+font_color = Color(1, 0.95686275, 0.8627451, 1)
+
+[node name="CurrentStock" type="Label" unique_id=772514501]
+offset_left = 17.0
+offset_top = 91.0
+offset_right = 315.0
+offset_bottom = 135.0
+text = "Stock: X Shares"
+label_settings = SubResource("LabelSettings_du5vk")
+horizontal_alignment = 1
