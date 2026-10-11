@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
 [ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
 [ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
+[ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="6_qsmkw"]
+[ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="7_qsmkw"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
 [ext_resource type="AudioStream" uid="uid://bjltibwkr746s" path="res://Audio/Background/BackgroundMusic.mp3" id="10_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
@@ -48,7 +50,7 @@ allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u
 gameOverScreen = NodePath("GameOverControl")
 mainGameUI = [NodePath("Cards"), NodePath("HUD"), NodePath("Background")]
 wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
-gameOverMusic = ExtResource("6_euts4")
+gameOverMusic = ExtResource("6_qsmkw")
 audioPlayer = NodePath("AudioStreamPlayer2D")
 
 [node name="Background" type="TextureRect" parent="." unique_id=854973071]
