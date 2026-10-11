@@ -7,6 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dnp8ircvg4cgs" path="res://UI/Scenes/TurnLabel.tscn" id="4_eml4d"]
 [ext_resource type="PackedScene" uid="uid://be4ltqnwilfge" path="res://UI/Scenes/RoundCounter.tscn" id="5_0sdtu"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="5_6fea8"]
+[ext_resource type="StyleBox" uid="uid://d2x5b4u64uxre" path="res://UI/Styles/Spin_Normal.tres" id="8_ia8jy"]
+[ext_resource type="StyleBox" uid="uid://cxrnc0mb8kcpt" path="res://UI/Styles/Spin_Pressed.tres" id="9_hhlsj"]
+[ext_resource type="StyleBox" uid="uid://b4q68bqxugj4j" path="res://UI/Styles/Spin_Hover.tres" id="10_lxqim"]
+[ext_resource type="StyleBox" uid="uid://b4csmfdsbqdmm" path="res://UI/Styles/Spin_Disabled.tres" id="11_crq7m"]
+[ext_resource type="Script" uid="uid://dxsc1cgprge3c" path="res://Scripts/UI/StockButton.cs" id="12_8o51v"]
+[ext_resource type="PackedScene" uid="uid://dh7vowkvnikym" path="res://2DScenes/Stock/StockGraph.tscn" id="13_ia8jy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ju06b"]
 font = ExtResource("5_6fea8")
@@ -18,12 +24,12 @@ font = ExtResource("5_6fea8")
 font_size = 40
 font_color = Color(1, 0.95686275, 0.8627451, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_gbe7e"]
+[sub_resource type="LabelSettings" id="LabelSettings_ia8jy"]
 resource_local_to_scene = true
 font = ExtResource("5_6fea8")
 font_size = 40
 
-[sub_resource type="LabelSettings" id="LabelSettings_wgoi2"]
+[sub_resource type="LabelSettings" id="LabelSettings_hhlsj"]
 resource_local_to_scene = true
 font = ExtResource("5_6fea8")
 font_size = 40
@@ -103,7 +109,7 @@ layout_mode = 2
 horizontal_alignment = 0
 
 [node name="MoneyLabel" parent="HUD/P1Panel/VBox/CurrentMoney" index="0" unique_id=1494912701]
-label_settings = SubResource("LabelSettings_gbe7e")
+label_settings = SubResource("LabelSettings_ia8jy")
 
 [node name="CurrentStock" parent="HUD/P1Panel/VBox" unique_id=1986085628 instance=ExtResource("3_0sdtu")]
 layout_mode = 2
@@ -143,11 +149,43 @@ layout_mode = 2
 horizontal_alignment = 0
 
 [node name="MoneyLabel" parent="HUD/P2Panel/VBox/CurrentMoney" index="0" unique_id=1494912701]
-label_settings = SubResource("LabelSettings_wgoi2")
+label_settings = SubResource("LabelSettings_hhlsj")
 
 [node name="CurrentStock" parent="HUD/P2Panel/VBox" unique_id=2096457451 instance=ExtResource("3_0sdtu")]
 layout_mode = 2
 horizontal_alignment = 0
+
+[node name="Stock" type="Button" parent="." unique_id=1629139896]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 0
+offset_left = 231.0
+offset_top = 617.0
+offset_right = 359.0
+offset_bottom = 681.0
+theme_override_fonts/font = ExtResource("5_6fea8")
+theme_override_styles/normal = ExtResource("8_ia8jy")
+theme_override_styles/pressed = ExtResource("9_hhlsj")
+theme_override_styles/hover = ExtResource("10_lxqim")
+theme_override_styles/disabled = ExtResource("11_crq7m")
+text = "Stock"
+script = ExtResource("12_8o51v")
+
+[node name="StockScreen" parent="." unique_id=1593453877 instance=ExtResource("13_ia8jy")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 140.31
+offset_top = 369.44
+offset_right = 140.31
+offset_bottom = 369.44
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=251533158]
+position = Vector2(231, 617)
+
+[connection signal="pressed" from="Stock" to="StockScreen" method="Open"]
 
 [editable path="HUD/P1Panel/VBox/CurrentMoney"]
 [editable path="HUD/P2Panel/VBox/CurrentMoney"]

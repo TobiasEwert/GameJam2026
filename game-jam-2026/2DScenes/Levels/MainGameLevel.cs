@@ -14,7 +14,7 @@ public partial class MainGameLevel : Node2D
   [Export] public AudioStreamMP3 gameOverMusic;
   [Export] public AudioStreamPlayer2D audioPlayer;
 
-  public override async void _Ready()
+  public override void _Ready()
   {
     _Turn = TurnManager.Instance;
     _Turn.possibleCards = allCards;

@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dh7vowkvnikym"]
+
+[ext_resource type="Script" uid="uid://br03svtinmfo1" path="res://Scripts/Stocks/StockScreen.cs" id="1_eslva"]
+[ext_resource type="Script" uid="uid://cw8m0fm14lbx2" path="res://Scripts/Stocks/StockGraph.cs" id="1_xdr8c"]
+
+[node name="StockScreen" type="Control" unique_id=1593453877 node_paths=PackedStringArray("graph", "priceLabel", "ownedLabel", "previewLabel", "amountSlider", "buyButton", "sellButton", "closeButton")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eslva")
+graph = NodePath("Dim/PanelContainer/VBox/StockGraph")
+priceLabel = NodePath("Dim/PanelContainer/VBox/PriceLabel")
+ownedLabel = NodePath("Dim/PanelContainer/VBox/OwnerLabel")
+previewLabel = NodePath("Dim/PanelContainer/VBox/PreviewLabel")
+amountSlider = NodePath("Dim/PanelContainer/VBox/AmountSlider")
+buyButton = NodePath("Dim/PanelContainer/VBox/HBoxContainer/BuyButton")
+sellButton = NodePath("Dim/PanelContainer/VBox/HBoxContainer/SellButton")
+closeButton = NodePath("Dim/PanelContainer/VBox/HBoxContainer/CloseButton")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=996943910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.60784316)
+
+[node name="PanelContainer" type="PanelContainer" parent="Dim" unique_id=314964644]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Dim/PanelContainer" unique_id=1827619459]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=1154377036]
+layout_mode = 2
+text = "Stock Market
+"
+
+[node name="PriceLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=1524844753]
+layout_mode = 2
+
+[node name="StockGraph" type="Control" parent="Dim/PanelContainer/VBox" unique_id=213477674]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+script = ExtResource("1_xdr8c")
+
+[node name="OwnerLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=811797399]
+layout_mode = 2
+
+[node name="AmountSlider" type="HSlider" parent="Dim/PanelContainer/VBox" unique_id=292340142]
+layout_mode = 2
+
+[node name="PreviewLabel" type="Label" parent="Dim/PanelContainer/VBox" unique_id=1732372960]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Dim/PanelContainer/VBox" unique_id=358158213]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=634388594]
+layout_mode = 2
+text = "Buy
+"
+
+[node name="SellButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=1225323476]
+layout_mode = 2
+text = "Sell"
+
+[node name="CloseButton" type="Button" parent="Dim/PanelContainer/VBox/HBoxContainer" unique_id=349176084]
+layout_mode = 2
+text = "Close
+"

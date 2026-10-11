@@ -29,7 +29,7 @@
 font = ExtResource("10_gumw0")
 font_size = 32
 
-[sub_resource type="LabelSettings" id="LabelSettings_j3x7l"]
+[sub_resource type="LabelSettings" id="LabelSettings_cntj0"]
 resource_local_to_scene = true
 font = ExtResource("10_gumw0")
 font_size = 32
@@ -108,7 +108,7 @@ offset_left = 5.0
 offset_top = -40.0
 offset_right = 139.0
 offset_bottom = 0.0
-label_settings = SubResource("LabelSettings_j3x7l")
+label_settings = SubResource("LabelSettings_cntj0")
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
 position = Vector2(242, -150)
