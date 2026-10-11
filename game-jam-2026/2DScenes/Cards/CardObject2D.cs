@@ -44,7 +44,7 @@ public partial class CardObject2D : GridContainer
       var btn = new Button();
       btn.Icon = cardData.Icon;
       btn.ExpandIcon = true;
-      btn.CustomMinimumSize = new Vector2(64, 64);
+      btn.CustomMinimumSize = new Vector2(80, 100);
       btn.FocusMode = FocusModeEnum.None;      
 
       int index = i;                       
