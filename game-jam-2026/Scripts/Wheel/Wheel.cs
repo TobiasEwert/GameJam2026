@@ -11,7 +11,7 @@ public partial class Wheel : Node2D
     [Export] public int MinTurns = 4;
     [Export] public AudioStreamPlayer TickSound;
 
-    const float PointerAngle = 0;
+    const float PointerAngle = Mathf.Pi / 2f;
 
     readonly RandomNumberGenerator rng = new();
     float[] starts, ends; 
@@ -22,12 +22,6 @@ public partial class Wheel : Node2D
     // Line outline for each wedge
     [Export] public Color LineColor = Colors.Black;
     [Export] public float LineWidth = 3f;
-
-    // Center circle
-    [Export] public float CapRadius = 30f;
-    [Export] public Color CapRimColor = new("e8b84a");
-    [Export] public Color CapInnerColor = new("2a1a3a");
-    [Export] public Color CapShineColor = new(1, 1, 1, 0.35f);
 
     public override void _Ready()
     {
@@ -85,13 +79,6 @@ public partial class Wheel : Node2D
             DrawLine(Vector2.Zero, edge, LineColor, LineWidth, true);
         }
         DrawArc(Vector2.Zero, Radius, 0f, Mathf.Tau, 64, LineColor, LineWidth, true);
-
-        // Center cap
-        DrawCircle(new Vector2(2, 3), CapRadius + 2f, new Color(0, 0, 0, 0.35f));
-        DrawCircle(Vector2.Zero, CapRadius, CapRimColor);
-        DrawCircle(Vector2.Zero, CapRadius * 0.7f, CapInnerColor);
-        DrawCircle(new Vector2(-CapRadius * 0.25f, -CapRadius * 0.25f),
-        CapRadius * 0.18f, CapShineColor);
     }
 
     public void Spin()

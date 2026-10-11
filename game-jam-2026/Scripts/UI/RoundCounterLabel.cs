@@ -14,12 +14,7 @@ public partial class RoundCounterLabel : Label
 
 	private void OnRoundChanged(int newRound)
 	{
-		this.Text = $"{newRound}";
-		if(newRound == 1)
-		{
-			Color finalRound = new Color("#C0392B");
-			this.LabelSettings.FontColor = finalRound;
-		}
+		this.Text = $"Rounds Remaining: {newRound}";
 	}
 	private void OnTurnStarted(int playerIndex)
 	{

@@ -1,12 +1,5 @@
 [gd_scene format=3 uid="uid://dhuw7hnhu05x2"]
 
-[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="1_6nn1m"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_57tt3"]
-font = ExtResource("1_6nn1m")
-font_size = 40
-font_color = Color(1, 0.95686275, 0.8627451, 1)
-
 [node name="CurrentPlayer" type="Label" unique_id=1908609233]
 offset_left = 411.0
 offset_top = 76.0
@@ -14,5 +7,4 @@ offset_right = 559.0
 offset_bottom = 128.0
 scale = Vector2(2, 2)
 text = "Player "
-label_settings = SubResource("LabelSettings_57tt3")
 horizontal_alignment = 1
