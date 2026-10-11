@@ -5,23 +5,27 @@ using Godot;
 public partial class WheelRoot : Node2D
 {
     [Signal] public delegate void RefreshAllButtonsEventHandler();
+
     [Export] Wheel wheel;
+    [Export] Node2D [] wheelNodes;
 	[Export] public Button spinButton;
 	[Export] public Button bankButton;
 	[Export] public Label spinCost;
+    [Export] public Button stockButton;
+    [Export] public StockScreen stockScreen;
     public TurnManager turnManager;
 
     Color freeSpin = new Color("#3FBF5F");
     Color paidSpin = new Color("#FFF4DC");
     Color tooExpensive = new Color("#FF4D4D");
 
-	//this.LabelSettings.FontColor = finalRound;
-
     public override void _Ready()
     {
 		spinButton.Pressed += OnSpinButtonPressed;
 		bankButton.Pressed += OnBankButtonPressed;
         wheel.SpinFinished += OnSpinFinished;
+        stockScreen.StockScreenOpened += OnStockScreenOpened;
+        stockScreen.StockScreenClosed += OnStockScreenClosed;
         turnManager = TurnManager.Instance;
         turnManager.TurnStarted += OnTurnStarted;
         turnManager.StartGame();
@@ -55,6 +59,35 @@ public partial class WheelRoot : Node2D
         {
             bankButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
         }
+
+        if(stockButton != null)
+        {
+            stockButton.Disabled = turnManager.currentState != TurnManager.TurnState.PlayerAction;
+        }
+        if(stockScreen != null)
+        {
+            stockScreen.Visible = false;
+            stockScreen.bIsOpen = false;
+        }
+        
+
+    }
+    private void OnStockScreenOpened()
+    {
+        foreach (var node in wheelNodes)
+        {
+            node.Visible = false;
+        }
+        wheel.Visible = false;
+    }
+
+    private void OnStockScreenClosed()
+    {
+        foreach (var node in wheelNodes)
+        {
+            node.Visible = true;
+        }
+        wheel.Visible = true;
     }
 	private void OnSpinButtonPressed()
 	{       
@@ -69,6 +102,7 @@ public partial class WheelRoot : Node2D
 	private void OnBankButtonPressed()
 	{        
 		TurnManager.Instance.BankEarnings();
+        OnStockScreenClosed();
         RefreshButtons();
 	}
 

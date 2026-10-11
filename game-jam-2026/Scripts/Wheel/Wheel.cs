@@ -36,6 +36,15 @@ public partial class Wheel : Node2D
     [Export] public float PegRadius = 5f;
     [Export] public Color PegColor = new("fff4dc");
 
+    // Pointer 
+    [Export] public Node2D Pointer;
+    [Export] public float KickDegrees = 18f;
+    [Export] public float KickReturnTime = 0.18f;
+    [Export] public float KickDirection = -1f;
+    Tween pointerTween;
+
+
+
     public override void _Ready()
     {
         rng.Randomize();
@@ -158,6 +167,7 @@ public partial class Wheel : Node2D
         {
             lastIndexUnderPointer = i;
             TickSound?.Play();
+            KickPointer();
         }
     }
 
@@ -169,5 +179,17 @@ public partial class Wheel : Node2D
             if (local < ends[i]) return i;
         }
         return ends.Length - 1;
+    }
+
+    void KickPointer()
+    {
+        if (Pointer == null) return;
+
+        pointerTween?.Kill();
+
+        Pointer.Rotation = Mathf.DegToRad(KickDegrees * KickDirection);
+
+        pointerTween = CreateTween();
+        pointerTween.TweenProperty(Pointer, "rotation", 0f, KickReturnTime).SetTrans(Tween.TransitionType.Elastic).SetEase(Tween.EaseType.Out);
     }
 }

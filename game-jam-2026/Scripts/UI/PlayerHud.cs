@@ -4,6 +4,7 @@ using System;
 public partial class PlayerHud : HBoxContainer
 {
 public TurnManager turnManager;
+public Stock stock;
 [Export] public PanelContainer p1Panel;
 [Export] public Label p1PlayerName;
 [Export] public Label p1Money;
@@ -22,6 +23,8 @@ StyleBoxFlat activeStyle, inactiveStyle;
 public override void _Ready()
 {
     turnManager = TurnManager.Instance;
+    stock = Stock.Instance;
+    stock.SharesChanged += OnSharesChanged;
 	turnManager.MoneyChanged += OnMoneyChanged;
 	turnManager.TurnStarted += OnTurnStarted;
 	p1PlayerName.Text = turnManager.players[0].playerName;
@@ -37,6 +40,7 @@ private void RefreshAll()
 	OnMoneyChanged(1, turnManager.players[1].currency);
 	HighlightPlayer(turnManager.currentPlayerIndex);
 }
+
 private void OnMoneyChanged(int playerIndex, int money)
 {
 	if (playerIndex == 0)
@@ -47,9 +51,18 @@ private void OnMoneyChanged(int playerIndex, int money)
 		{
 			p2Money.Text = $"{money}";
 		} 
-	
 }
-		
+private void OnSharesChanged(int playerIndex, float shares)
+{
+    if (playerIndex == 0)
+    {
+        p1Stock.Text = $"Shares: {shares:F2}";
+    }
+    else if (playerIndex == 1)
+    {
+        p2Stock.Text = $"Shares: {shares:F2}";
+    }
+}
 private void OnTurnStarted(int playerIndex)
 {
 	OnMoneyChanged(playerIndex, turnManager.currentPlayer.currency);

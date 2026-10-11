@@ -36,6 +36,10 @@ public partial class Stock : Node
       {
         player.stockShares = cashToInvest / CurrentValue;
       }
+      turnManager.currentState = TurnManager.TurnState.PlayerAction;
+      player.stockShares += cashToInvest / CurrentValue;
+      EmitSignal(SignalName.SharesChanged, turnManager.currentPlayerIndex, player.stockShares);
+      return true;
   }
 
   public bool SellAllStocks(PlayerData player)

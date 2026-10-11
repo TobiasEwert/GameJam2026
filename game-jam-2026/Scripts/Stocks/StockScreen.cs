@@ -1,9 +1,11 @@
 using Godot;
 using System.Collections.Generic;
 
-
+[GlobalClass]
 public partial class StockScreen : Control
-{
+{    
+    [Signal] public delegate void StockScreenOpenedEventHandler();
+    [Signal] public delegate void StockScreenClosedEventHandler();
     [Export] public StockGraph graph;
     [Export] public Label priceLabel;
     [Export] public Label ownedLabel;
@@ -12,10 +14,13 @@ public partial class StockScreen : Control
     [Export] public Button buyButton;
     [Export] public Button sellButton;
     [Export] public Button closeButton;
+    public bool bIsOpen = false;
     // Lambda
     public void Close()
     {
         Visible = false;
+        bIsOpen = false;
+        EmitSignal(nameof(StockScreenClosed));
         turnManager.currentState = TurnManager.TurnState.PlayerAction;
     }
 
@@ -51,11 +56,21 @@ public partial class StockScreen : Control
 
     public void Open()
     {
+        if(bIsOpen)
+        {
+            Visible = false;
+            bIsOpen = false;
+            EmitSignal(nameof(StockScreenClosed));
+            turnManager.currentState = TurnManager.TurnState.PlayerAction;
+            return;
+        }
         if (turnManager.currentState != TurnManager.TurnState.PlayerAction)
         {
             return;
         }
+        bIsOpen = true;
         Visible = true;
+        EmitSignal(nameof(StockScreenOpened));
         Refresh();
     }
 
