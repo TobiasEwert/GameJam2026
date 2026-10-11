@@ -44,12 +44,14 @@ script = ExtResource("1_cntj0")
 wheel = NodePath("../Wheel")
 Offset = Vector2(8, 10)
 
-[node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound")]
+[node name="Wheel" type="Node2D" parent="." unique_id=2050560909 node_paths=PackedStringArray("TickSound", "Pointer")]
 script = ExtResource("2_c5ljd")
 Wedges = Array[ExtResource("3_rguok")]([ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("7_5fvti"), ExtResource("4_eod1k"), ExtResource("5_ybl86"), ExtResource("6_nnn5j"), ExtResource("9_2p2tj"), ExtResource("5_ybl86"), ExtResource("6_nnn5j")])
 SpinTime = 6.755
 TickSound = NodePath("../WheelTick")
 customFont = ExtResource("10_gumw0")
+Pointer = NodePath("../Pointer")
+KickDirection = 1.0
 
 [node name="WheelRoot" type="Node2D" parent="Wheel" unique_id=1441251757 node_paths=PackedStringArray("wheel", "spinButton", "bankButton", "spinCost", "stockButton", "stockScreen")]
 script = ExtResource("1_eod1k")
@@ -128,11 +130,11 @@ offset_bottom = 0.0
 label_settings = SubResource("LabelSettings_0utv3")
 
 [node name="Pointer" type="Polygon2D" parent="." unique_id=68424672]
-position = Vector2(242, -150)
-rotation = -1.5707964
+position = Vector2(295, -8)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-158, 36, -144, 36, -152, -64)
-uv = PackedVector2Array(-158, 35.5, -147.5, 35, -155, -62.5)
+offset = Vector2(170.025, 0)
+polygon = PackedVector2Array(-168, 16, -168, 0, -280.00003, 8)
+uv = PackedVector2Array(-168, 32, -168, 8, -280.00003, 8)
 
 [node name="WheelTick" type="AudioStreamPlayer" parent="." unique_id=441105140]
 stream = ExtResource("10_gquxa")
