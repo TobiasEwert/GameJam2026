@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmav3t33brgq1" path="res://Scripts/UI/StartMenu.cs" id="1_670oc"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="2_luet2"]
+[ext_resource type="Texture2D" uid="uid://1vqnhhrgt65y" path="res://Art/Sprites/TempStartScreen.png" id="2_n51jw"]
 [ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="3_n51jw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l0bqs"]
@@ -24,8 +25,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.998
 anchor_bottom = 1.0
-offset_right = 0.30395508
-offset_bottom = -3.0
+offset_right = 2.303955
+texture = ExtResource("2_n51jw")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="TextureRect" unique_id=2048565711]
 layout_mode = 1
@@ -34,9 +36,10 @@ anchor_left = 0.24800001
 anchor_top = 0.127
 anchor_right = 0.721
 anchor_bottom = 0.4
-offset_left = -0.2000122
-offset_top = 0.084999084
-offset_right = -0.15002441
+offset_left = 21.303986
+offset_top = 49.703995
+offset_right = 21.354004
+offset_bottom = 49.618988
 text = "Game Name"
 label_settings = SubResource("LabelSettings_l0bqs")
 horizontal_alignment = 1
@@ -45,14 +48,15 @@ vertical_alignment = 1
 [node name="Button" type="Button" parent="TextureRect" unique_id=1791579108]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.407
-anchor_top = 0.47300002
-anchor_right = 0.551
-anchor_bottom = 0.61200005
-offset_left = -0.05001831
-offset_top = -0.08502197
-offset_right = 0.3499756
-offset_bottom = 0.25997925
+anchor_left = 0.42400002
+anchor_top = 0.716
+anchor_right = 0.569
+anchor_bottom = 0.85600007
+offset_left = 0.55197144
+offset_top = 0.031982422
+offset_right = -0.20007324
+offset_bottom = -0.27105713
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_luet2")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lr00t")
