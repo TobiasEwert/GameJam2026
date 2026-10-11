@@ -39,6 +39,48 @@ bg_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irmxn"]
 bg_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxo0e"]
+bg_color = Color(0.24383378, 0.4124503, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0.54901963, 0, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a40po"]
+bg_color = Color(0.027419727, 1.217708e-05, 0.444858, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.11621105, 0.043338485, 0.99997956, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0.54901963, 0, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovp32"]
+bg_color = Color(0.11753418, 0.120952554, 0.99998206, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0.54901963, 0, 1)
+shadow_size = 1
+
 [node name="StockScreen" type="Control" unique_id=1593453877 node_paths=PackedStringArray("graph", "priceLabel", "ownedLabel", "previewLabel", "amountSlider", "buyButton", "sellButton", "closeButton")]
 visible = false
 layout_mode = 3
@@ -122,6 +164,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.95686275, 0.8627451, 1)
 theme_override_styles/normal = ExtResource("4_4s2fq")
 theme_override_styles/pressed = ExtResource("5_loxrq")
 theme_override_styles/hover = ExtResource("6_ti3rv")
@@ -133,6 +176,7 @@ text = "Buy
 custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.95686275, 0.8627451, 1)
 theme_override_styles/normal = ExtResource("7_gjqpx")
 theme_override_styles/pressed = ExtResource("8_pxo0e")
 theme_override_styles/hover = ExtResource("9_frg1g")
@@ -143,5 +187,9 @@ text = "SELL ALL"
 custom_minimum_size = Vector2(120, 48)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.95686275, 0.8627451, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_pxo0e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a40po")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ovp32")
 text = "Close
 "
