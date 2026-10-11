@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
 [ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
 [ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
+[ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="7_qsmkw"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
 [ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
@@ -36,26 +37,27 @@ Icon = ExtResource("5_w7uyn")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
-[sub_resource type="LabelSettings" id="LabelSettings_bgl7e"]
+[sub_resource type="LabelSettings" id="LabelSettings_qsmkw"]
 resource_local_to_scene = true
 font = ExtResource("9_bgl7e")
 font_size = 32
-font_color = Color(1, 0.95686275, 0.8627451, 1)
+font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheelRoot", "audioPlayer")]
 script = ExtResource("1_hfy5k")
 allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
 gameOverScreen = NodePath("GameOverControl")
-mainGameUI = [NodePath("Cards"), NodePath("HUD")]
+mainGameUI = [NodePath("Cards"), NodePath("HUD"), NodePath("Background")]
 wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
 gameOverMusic = ExtResource("6_euts4")
 audioPlayer = NodePath("AudioStreamPlayer2D")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
-offset_left = 759.0
-offset_top = 308.0
-offset_right = 1913.0
-offset_bottom = 958.0
+[node name="Background" type="TextureRect" parent="." unique_id=854973071]
+offset_left = -78.0
+offset_top = 52.0
+offset_right = 1187.0
+offset_bottom = 760.0
+texture = ExtResource("7_qsmkw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
@@ -67,21 +69,48 @@ metadata/_edit_use_anchors_ = true
 [node name="WheelBase" parent="." unique_id=1083205891 instance=ExtResource("2_crmak")]
 position = Vector2(558, 365)
 
+[node name="WheelShadow" parent="WheelBase" index="0" unique_id=1251426410]
+position = Vector2(327, 38)
+
+[node name="Wheel" parent="WheelBase" index="1" unique_id=2050560909]
+position = Vector2(327, 38)
+
 [node name="Spin" parent="WheelBase" index="2" unique_id=1403386969]
+offset_left = -387.0
+offset_top = 325.0
+offset_right = -259.0
+offset_bottom = 389.0
 metadata/_edit_use_anchors_ = true
 
 [node name="SpinCostLabel" parent="WheelBase/Spin" index="0" unique_id=717428040]
 metadata/_edit_use_anchors_ = true
 
 [node name="Stock" parent="WheelBase" index="3" unique_id=1570434061]
+offset_left = -196.015
+offset_top = 323.0
+offset_right = -68.015
+offset_bottom = 387.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Bank Money" parent="WheelBase" index="4" unique_id=1654285049]
+offset_left = -3.0
+offset_top = 323.0
+offset_right = 125.0
+offset_bottom = 387.0
 metadata/_edit_use_anchors_ = true
 
 [node name="RoundPotLabel" parent="WheelBase/Bank Money" index="0" unique_id=106352326]
-label_settings = SubResource("LabelSettings_bgl7e")
+label_settings = SubResource("LabelSettings_qsmkw")
 metadata/_edit_use_anchors_ = true
+
+[node name="Pointer" parent="WheelBase" index="5" unique_id=68424672]
+position = Vector2(622, 30)
+
+[node name="StockScreen" parent="WheelBase" index="8" unique_id=1593453877]
+offset_left = -275.875
+offset_top = 62.775
+offset_right = -275.875
+offset_bottom = 62.775
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
 stream = ExtResource("12_bgl7e")

@@ -5,7 +5,7 @@ public partial class RoundPotLabel : Label
 {
 	public TurnManager turnManager;
 	Color positivePot = new Color("#3FBF5F");
-    Color zeroPot = new Color("#fff4dc");
+    Color zeroPot = new Color("#e8b84a");
     Color negativePot = new Color("#FF4D4D");
 	public override void _Ready()
 	{

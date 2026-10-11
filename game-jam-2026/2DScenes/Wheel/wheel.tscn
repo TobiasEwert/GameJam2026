@@ -30,12 +30,13 @@
 [sub_resource type="LabelSettings" id="LabelSettings_5sa42"]
 font = ExtResource("10_gumw0")
 font_size = 32
+font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_0utv3"]
 resource_local_to_scene = true
 font = ExtResource("10_gumw0")
 font_size = 32
-font_color = Color(1, 0.95686275, 0.8627451, 1)
+font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 
 [node name="WheelBase" type="Node2D" unique_id=1083205891]
 

@@ -15,8 +15,8 @@ public partial class WheelRoot : Node2D
     [Export] public StockScreen stockScreen;
     public TurnManager turnManager;
 
-    Color freeSpin = new Color("#3FBF5F");
-    Color paidSpin = new Color("#FFF4DC");
+    Color freeSpin = new Color("#e8b84a");
+    Color paidSpin = new Color("#e8b84a");
     Color tooExpensive = new Color("#FF4D4D");
 
     public override void _Ready()
@@ -24,8 +24,6 @@ public partial class WheelRoot : Node2D
 		spinButton.Pressed += OnSpinButtonPressed;
 		bankButton.Pressed += OnBankButtonPressed;
         wheel.SpinFinished += OnSpinFinished;
-        stockScreen.StockScreenOpened += OnStockScreenOpened;
-        stockScreen.StockScreenClosed += OnStockScreenClosed;
         turnManager = TurnManager.Instance;
         turnManager.TurnStarted += OnTurnStarted;
         turnManager.StartGame();
@@ -72,23 +70,7 @@ public partial class WheelRoot : Node2D
         
 
     }
-    private void OnStockScreenOpened()
-    {
-        foreach (var node in wheelNodes)
-        {
-            node.Visible = false;
-        }
-        wheel.Visible = false;
-    }
 
-    private void OnStockScreenClosed()
-    {
-        foreach (var node in wheelNodes)
-        {
-            node.Visible = true;
-        }
-        wheel.Visible = true;
-    }
 	private void OnSpinButtonPressed()
 	{       
         if(turnManager.TryPaySpin())
@@ -102,7 +84,6 @@ public partial class WheelRoot : Node2D
 	private void OnBankButtonPressed()
 	{        
 		TurnManager.Instance.BankEarnings();
-        OnStockScreenClosed();
         RefreshButtons();
 	}
 
