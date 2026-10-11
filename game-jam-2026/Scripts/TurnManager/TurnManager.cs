@@ -40,6 +40,10 @@ public partial class TurnManager : Node
 	public int currentRound { get; set; }
 	public int spinsThisTurn { get; set; }
 	public int nextSpinCost = 0;	
+	public int nextSpinWinningsMultiplier = 1;
+	public const int MinForcedBet = 250;
+	private int[] pendingForcedBet = new int[2];
+	public bool forcedBetActive { get; private set; }
 	public CardData[] possibleCards { get; set; }	
 	[Export] public AudioStreamPlayer2D audioPlayer;
 	public override void _Ready()
@@ -69,15 +73,33 @@ public partial class TurnManager : Node
 		currentState = TurnState.TurnStart;
 		currentPlayer = players[currentPlayerIndex];
 		GD.Print("Starting turn for: ", currentPlayer.playerName);
-		currentPlayer.roundEarnings = 0; // reset the round earnings at the start of the turn, pot
+		currentPlayer.roundEarnings = 0;
 		spinsThisTurn = 0;
 		nextSpinCost = 0;
+		nextSpinWinningsMultiplier = 1;
+		forcedBetActive = false;
+
+		int forcedBet = pendingForcedBet[currentPlayerIndex];
+		pendingForcedBet[currentPlayerIndex] = 0;
+		if(forcedBet > 0)
+		{
+			nextSpinCost = Mathf.Min(forcedBet, currentPlayer.currency);
+			forcedBetActive = nextSpinCost > 0;
+		}
+
 		EmitSignal(SignalName.TurnStarted, currentPlayerIndex);
 		currentState = TurnState.PlayerAction;
+
+		if(forcedBetActive)
+		{
+			EmitSignal(
+				SignalName.PopupMessage,
+				$"{currentPlayer.playerName}'s TURN\n\nYou were forced to bet ${nextSpinCost} on this spin!"
+			);
+		}
 		// Do Not change state here, change it on the Action Logic, sit on PlayerAction until an action is taken
 	}
 
-	// Try To Pay
 	public bool TryPay(int amount)
 	{
 		if(currentPlayer.currency >= amount)
@@ -89,29 +111,26 @@ public partial class TurnManager : Node
 		}
 		return false;
 	}
-
-	// Will be called externally, if true, then it spins, if false, it does not.
-	// If true go to ActionWaiting state
+	
 	public bool TryPaySpin()
 	{
 		if(currentState != TurnState.PlayerAction)
 		{
-			return false; // if not waiting for player action, do not try to spin
+			return false;
 		}
 		GD.Print("Next spin cost: ", nextSpinCost);
 		if(!TryPay(nextSpinCost))
 		{
-			return false; // not enough money
+			return false;
 		}
 		spinsThisTurn++;
+		forcedBetActive = false;
 		return true;
 	}
 
 	public void WedgeAction(Wedge wedge)
 	{
 		int oldPot = currentPlayer.roundEarnings;
-		int spinReward = nextSpinCost * nextSpinWinningsMultiplier;
-		// The enum is in Wedge.cs add whatever types you want
 		switch (wedge.Type)
 		{
 			case Wedge.WedgeType.Bust:
@@ -119,19 +138,19 @@ public partial class TurnManager : Node
 				EndTurn();
 				return;
 			case Wedge.WedgeType.BreakEven:
-				currentPlayer.roundEarnings += spinReward;
+				currentPlayer.roundEarnings += nextSpinCost;
 				break;
 			case Wedge.WedgeType.Lose:
-				currentPlayer.roundEarnings -= spinReward;
+				currentPlayer.roundEarnings -= nextSpinCost;
 				break;
 			case Wedge.WedgeType.Double:
-				currentPlayer.roundEarnings += spinReward * 2;
+				currentPlayer.roundEarnings += nextSpinCost * 2;
 				break;
 			case Wedge.WedgeType.Triple:
-				currentPlayer.roundEarnings += spinReward  * 3;
+				currentPlayer.roundEarnings += nextSpinCost  * 3;
 				break;
 			case Wedge.WedgeType.Half:
-				currentPlayer.roundEarnings += spinReward / 2;
+				currentPlayer.roundEarnings += nextSpinCost / 2;
 				break;
 			case Wedge.WedgeType.Add:
 				currentPlayer.roundEarnings += wedge.Amount;
@@ -150,6 +169,11 @@ public partial class TurnManager : Node
 			// Add additional wedge types here
 		}
 		
+		nint gained = currentPlayer.roundEarnings - oldPot;
+		if(nextSpinWinningsMultiplier > 1 && gained > 0)
+		{
+			currentPlayer.roundEarnings = oldPot + gained * nextSpinWinningsMultiplier;
+		}
 		nextSpinWinningsMultiplier = 1;
 		if(wedge.audio != null && audioPlayer != null)
 		{
@@ -175,12 +199,16 @@ public partial class TurnManager : Node
 		}
 	}
 	
-	// This saves the roundEarnings and applies them to the player's currency
 	public void BankEarnings()
 	{
 		if(currentState != TurnState.PlayerAction)
 		{
 			return; 
+		}
+		if(forcedBetActive)
+		{
+			EmitSignal(SignalName.PopupMessage, $"You must spin your forced ${nextSpinCost} bet before banking!");
+			return;
 		}
 		currentPlayer.currency += currentPlayer.roundEarnings;
 		currentPlayer.roundEarnings = 0;
@@ -222,6 +250,28 @@ public partial class TurnManager : Node
 			EmitSignal(SignalName.RoundChanged, currentRound);
 		}
 		StartTurn();
+	}
+
+	public int SetForcedBet(int targetPlayerIndex)
+	{
+		int targetMoney = players[targetPlayerIndex].currency;
+		if(targetMoney <= 0)
+		{
+			return 0;
+		}
+		int amount;
+		if(targetMoney <= MinForcedBet)
+		{
+			amount = targetMoney; // can't cover the minimum, so they go all in
+		}
+		else
+		{
+			var rng = new RandomNumberGenerator();
+			rng.Randomize();
+			amount = rng.RandiRange(MinForcedBet, targetMoney);
+		}
+		pendingForcedBet[targetPlayerIndex] = amount;
+		return amount;
 	}
 
 	public void EndGame()
