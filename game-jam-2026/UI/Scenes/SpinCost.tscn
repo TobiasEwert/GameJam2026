@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://jm587blkc6bo"]
+
+[ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="1_h07yr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tm26l"]
+font = ExtResource("1_h07yr")
+font_size = 25
+
+[node name="SpinCostLabel" type="Label" unique_id=717428040]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Spin Cost: $"
+label_settings = SubResource("LabelSettings_tm26l")

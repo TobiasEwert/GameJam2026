@@ -4,26 +4,32 @@
 [ext_resource type="Script" uid="uid://cuhsiqa5supx2" path="res://2DScenes/Levels/MainGameLevel.cs" id="1_hfy5k"]
 [ext_resource type="PackedScene" uid="uid://cjdtk3y243uap" path="res://UI/Scenes/RoundMoney.tscn" id="2_cpi3i"]
 [ext_resource type="PackedScene" uid="uid://xcy8087uj0m8" path="res://2DScenes/Wheel/wheel.tscn" id="2_crmak"]
+[ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="2_qm2ls"]
 [ext_resource type="Script" uid="uid://lwmx5ydk4pu1" path="res://2DScenes/Cards/CardData.cs" id="3_qsmkw"]
 [ext_resource type="PackedScene" uid="uid://be4ltqnwilfge" path="res://UI/Scenes/RoundCounter.tscn" id="3_uw4gr"]
 [ext_resource type="PackedScene" uid="uid://dhuw7hnhu05x2" path="res://UI/Scenes/PlayerName.tscn" id="4_1vbin"]
+[ext_resource type="Texture2D" uid="uid://byjvu6o8xke8w" path="res://Art/Sprites/MazeSphere.png" id="4_a8fvf"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="4_r10rw"]
 [ext_resource type="PackedScene" uid="uid://cy1jjrvilr71v" path="res://2DScenes/Cards/CardInventory.tscn" id="5_ce0ef"]
+[ext_resource type="Texture2D" uid="uid://bnkjxthy3eng5" path="res://Art/Sprites/GameWheelv1.png" id="5_w7uyn"]
 [ext_resource type="AudioStream" uid="uid://bf4cjyhc8d22o" path="res://Audio/Background/WinScreenBg.mp3" id="6_euts4"]
 [ext_resource type="Script" uid="uid://ct3yw81efvwpx" path="res://Scripts/UI/PlayerName.cs" id="9_qsmkw"]
 [ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="13_qsmkw"]
+[ext_resource type="PackedScene" uid="uid://jm587blkc6bo" path="res://UI/Scenes/SpinCost.tscn" id="17_a8fvf"]
 
 [sub_resource type="Resource" id="Resource_y8rvs"]
 script = ExtResource("3_qsmkw")
 CardName = "TEST 1"
 Description = "TEST 1"
+Icon = ExtResource("2_qm2ls")
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_u1ot7"]
 script = ExtResource("3_qsmkw")
 CardName = "TEST 2"
 Description = "TEST 2"
+Icon = ExtResource("4_a8fvf")
 ActionId = 1
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
@@ -31,6 +37,7 @@ metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 script = ExtResource("3_qsmkw")
 CardName = "TEST 3"
 Description = "TEST 3"
+Icon = ExtResource("5_w7uyn")
 ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
@@ -50,14 +57,15 @@ font_size = 25
 font = ExtResource("4_r10rw")
 font_size = 40
 
-[node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheel", "audioPlayer")]
+[node name="Node2D" type="Node2D" unique_id=1824066282 node_paths=PackedStringArray("gameOverScreen", "mainGameUI", "wheelRoot", "audioPlayer", "spinCost")]
 script = ExtResource("1_hfy5k")
 allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol")])
 gameOverScreen = NodePath("GameOverControl")
-mainGameUI = [NodePath("CurrentMoney"), NodePath("RoundMoney"), NodePath("Round"), NodePath("CurrentPlayer"), NodePath("Cards")]
-wheel = NodePath("WheelBase")
+mainGameUI = [NodePath("CurrentMoney"), NodePath("RoundMoney"), NodePath("Round"), NodePath("CurrentPlayer"), NodePath("Cards"), NodePath("SpinCostLabel")]
+wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
 gameOverMusic = ExtResource("6_euts4")
 audioPlayer = NodePath("AudioStreamPlayer2D")
+spinCost = NodePath("SpinCostLabel")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=854973071]
 offset_left = 759.0
@@ -107,3 +115,16 @@ stream = ExtResource("12_bgl7e")
 autoplay = true
 
 [node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("13_qsmkw")]
+
+[node name="SpinCostLabel" parent="." unique_id=717428040 instance=ExtResource("17_a8fvf")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -11.0
+offset_top = 179.0
+offset_right = 129.0
+offset_bottom = 205.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[editable path="WheelBase"]

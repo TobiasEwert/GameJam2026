@@ -33,13 +33,14 @@ public partial class TurnManager : Node
 	public Stock stockInstance { get; private set; }
 	public TurnState currentState { get; set; } = TurnState.StartGame;
 	public PlayerData currentPlayer { get; set; }
-	[Export] public PlayerData[] players { get; set; }
+	public PlayerData[] players { get; set; }
 
 	public int currentPlayerIndex { get; set; }
 	public int currentRound { get; set; }
 	public int spinsThisTurn { get; set; }
-	public int nextSpinCost => startingSpinCost * spinsThisTurn;	
+	public int nextSpinCost = 0;	
 	public CardData[] possibleCards { get; set; }	
+	[Export] public AudioStreamPlayer2D audioPlayer;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -55,8 +56,8 @@ public partial class TurnManager : Node
 		currentState = TurnState.StartGame;
 		currentPlayerIndex = 0;
 		currentRound = maxRounds;
-		//players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; // hardset the names
-		EmitSignal(SignalName.GameStarted); // might be removed as it may not be necessary
+		players = new [] {new PlayerData {playerName = "Player 1", currency = gameConfig.startingCurrency }, new PlayerData {playerName = "Player 2", currency = gameConfig.startingCurrency }}; // hardset the names
+		EmitSignal(SignalName.GameStarted);
 		EmitSignal(SignalName.RoundChanged, currentRound);
 		StartTurn();
 	}
@@ -68,6 +69,7 @@ public partial class TurnManager : Node
 		GD.Print("Starting turn for: ", currentPlayer.playerName);
 		currentPlayer.roundEarnings = 0; // reset the round earnings at the start of the turn, pot
 		spinsThisTurn = 0;
+		nextSpinCost = 0;
 		EmitSignal(SignalName.TurnStarted, currentPlayerIndex);
 		currentState = TurnState.PlayerAction;
 		// Do Not change state here, change it on the Action Logic, sit on PlayerAction until an action is taken
@@ -94,12 +96,12 @@ public partial class TurnManager : Node
 		{
 			return false; // if not waiting for player action, do not try to spin
 		}
-
+		GD.Print("Next spin cost: ", nextSpinCost);
 		if(!TryPay(nextSpinCost))
 		{
 			return false; // not enough money
 		}
-
+		spinsThisTurn++;
 		return true;
 	}
 
@@ -110,7 +112,7 @@ public partial class TurnManager : Node
 		switch (wedge.Type)
 		{
 			case Wedge.WedgeType.Bust:
-				ApplyBust(); 
+				ApplyBust(wedge); 
 				EndTurn();
 				return;
 			case Wedge.WedgeType.BreakEven:
@@ -144,18 +146,28 @@ public partial class TurnManager : Node
 
 			// Add additional wedge types here
 		}
-		spinsThisTurn++;
+		if(wedge.audio != null && audioPlayer != null)
+		{
+			audioPlayer.Stream = wedge.audio;
+			audioPlayer.Play();
+		}
 		EmitSignal(SignalName.PotChanged, currentPlayerIndex, currentPlayer.roundEarnings);
 		EmitSignal(SignalName.WedgeResolved, wedge, oldPot, currentPlayer.roundEarnings);
+		nextSpinCost = startingSpinCost * spinsThisTurn;
 		currentState = TurnState.PlayerAction;
 	}
 	
-	public void ApplyBust()
+	public void ApplyBust(Wedge wedge)
 	{
-		currentPlayer.roundEarnings = 0;
+		currentPlayer.roundEarnings = Mathf.Min(currentPlayer.roundEarnings, 0); 
 		EmitSignal(SignalName.PotChanged, currentPlayerIndex, currentPlayer.roundEarnings);
 		currentState = TurnState.TurnEnd;
 		EmitSignal(SignalName.TurnEnded, currentPlayerIndex, true);
+		if(wedge.audio != null && audioPlayer != null)
+		{
+			audioPlayer.Stream = wedge.audio;
+			audioPlayer.Play();
+		}
 	}
 	
 	// This saves the roundEarnings and applies them to the player's currency
@@ -175,6 +187,10 @@ public partial class TurnManager : Node
 	public void EndTurn()
 	{
 		currentState = TurnState.TurnEnd;
+		if(currentPlayer.currency <= 0)
+		{
+			EndGame();
+		}
 		EmitSignal(SignalName.TurnEnded, currentPlayerIndex, false);
 		//TESTING
 		AdvanceTurn();

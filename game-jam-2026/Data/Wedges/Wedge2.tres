@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_5gsav")
-Label = "Ability Card"
+Label = "Draw Card"
 Icon = ExtResource("1_vt0p8")
 Type = 7
 Amount = 0

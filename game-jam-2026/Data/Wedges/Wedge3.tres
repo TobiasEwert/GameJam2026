@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="Wedge" format=3 uid="uid://cpvj4yquhi4vy"]
 
 [ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="1_shmiu"]
+[ext_resource type="AudioStream" uid="uid://cfs6jevabbs8s" path="res://Audio/SFX/MoneyWon.wav" id="2_uolmn"]
 [ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="2_wuuew"]
 
 [resource]
 script = ExtResource("2_wuuew")
-Label = "+$200"
+Label = "$200"
 Icon = ExtResource("1_shmiu")
-Amount = 200
+Amount = -1000
 Weight = 0.3
+audio = ExtResource("2_uolmn")
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

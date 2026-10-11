@@ -49,8 +49,6 @@ public partial class Stock : Node
       player.currency += payoutValue;
       player.stockShares = 0;
       player.currency += payoutValue;
-  
-
     }
   }
 }

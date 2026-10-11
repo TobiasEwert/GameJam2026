@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Wedge" format=3 uid="uid://ba5v3njs874nt"]
 
 [ext_resource type="Texture2D" uid="uid://yx167k4gv5hv" path="res://Art/Sprites/testingIcon.webp" id="1_rytbk"]
+[ext_resource type="AudioStream" uid="uid://ceb3518wjgqka" path="res://Audio/SFX/MoneyLost.wav" id="2_d5uxp"]
 [ext_resource type="Script" uid="uid://dktxdbn3dud04" path="res://Scripts/Resources/Wedge.cs" id="2_l82na"]
 
 [resource]
@@ -11,4 +12,5 @@ Type = 2
 Amount = 0
 Weight = 0.1
 Color = Color(1, 0, 0, 1)
+audio = ExtResource("2_d5uxp")
 metadata/_custom_type_script = "uid://dktxdbn3dud04"

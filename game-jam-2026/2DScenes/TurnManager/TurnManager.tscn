@@ -2,25 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cdowjwy5w0enf" path="res://Scripts/TurnManager/TurnManager.cs" id="1_03rss"]
 [ext_resource type="Resource" uid="uid://bfnkkoc7q12i5" path="res://Data/GameConfig/GameConfig.tres" id="2_80onc"]
-[ext_resource type="Script" uid="uid://yupj2l8weto7" path="res://Scripts/Resources/PlayerData.cs" id="6_qawql"]
 
-[sub_resource type="Resource" id="Resource_08jof"]
-script = ExtResource("6_qawql")
-currency = 100
-luck = 0.1
-playerName = "Player1"
-abilityCards = null
-metadata/_custom_type_script = "uid://yupj2l8weto7"
-
-[sub_resource type="Resource" id="Resource_ce0ef"]
-script = ExtResource("6_qawql")
-currency = 100
-luck = 1.0
-playerName = "Player 2"
-abilityCards = null
-metadata/_custom_type_script = "uid://yupj2l8weto7"
-
-[node name="TurnManager" type="Node" unique_id=1460189294]
+[node name="TurnManager" type="Node" unique_id=1460189294 node_paths=PackedStringArray("audioPlayer")]
 script = ExtResource("1_03rss")
 gameConfig = ExtResource("2_80onc")
-players = Array[Object]([SubResource("Resource_08jof"), SubResource("Resource_ce0ef")])
+audioPlayer = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2122341383]

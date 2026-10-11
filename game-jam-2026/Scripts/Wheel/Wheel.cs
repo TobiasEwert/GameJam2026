@@ -17,6 +17,7 @@ public partial class Wheel : Node2D
     float[] starts, ends; 
     bool spinning;
     int lastIndexUnderPointer = -1;
+    [Export] public Font customFont;
 
     // Line outline for each wedge
     [Export] public Color LineColor = Colors.Black;
@@ -60,8 +61,8 @@ public partial class Wheel : Node2D
             DrawColoredPolygon(pts, Wedges[i].Color);
 
             float mid = (starts[i] + ends[i]) / 2f;
-            DrawSetTransform(Vector2.FromAngle(mid) * Radius * 0.4f, mid, Vector2.One);
-            DrawString(ThemeDB.FallbackFont, new Vector2(-24, 6), Wedges[i].Label, HorizontalAlignment.Center, 96, 18);
+            DrawSetTransform(Vector2.FromAngle(mid) * Radius * 0.35f, mid, Vector2.One);
+            DrawString(customFont, new Vector2(-24, 6), Wedges[i].Label, HorizontalAlignment.Center, 96, 18);
             mid = (starts[i] + ends[i]) / 2f;
             Vector2 center = Vector2.FromAngle(mid) * Radius * 0.8f;
             float iconSize = 24f; 
