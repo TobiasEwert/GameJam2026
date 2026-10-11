@@ -12,6 +12,7 @@ public partial class TurnManager : Node
 	[Signal] public delegate void MoneyChangedEventHandler(int playerIndex, int money); // once you end the turn, the pot is added to the player's money
 	[Signal] public delegate void PotChangedEventHandler(int playerIndex, int potAmount); // spin by spin change, this is what will be added/subtracted as you spin/play action cards
 	[Signal] public delegate void WedgeResolvedEventHandler(Wedge wedge, int oldPot, int newPot);
+	[Signal] public delegate void PopupMessageEventHandler(string message);
 
 	public enum TurnState
 	{
@@ -60,6 +61,7 @@ public partial class TurnManager : Node
 		EmitSignal(SignalName.GameStarted);
 		EmitSignal(SignalName.RoundChanged, currentRound);
 		StartTurn();
+		EmitSignal(SignalName.PopupMessage, $"{currentPlayer.playerName}'s TURN");
 	}
 
 	public void StartTurn()
@@ -108,6 +110,7 @@ public partial class TurnManager : Node
 	public void WedgeAction(Wedge wedge)
 	{
 		int oldPot = currentPlayer.roundEarnings;
+		int spinReward = nextSpinCost * nextSpinWinningsMultiplier;
 		// The enum is in Wedge.cs add whatever types you want
 		switch (wedge.Type)
 		{
@@ -116,19 +119,19 @@ public partial class TurnManager : Node
 				EndTurn();
 				return;
 			case Wedge.WedgeType.BreakEven:
-				currentPlayer.roundEarnings += nextSpinCost;
+				currentPlayer.roundEarnings += spinReward;
 				break;
 			case Wedge.WedgeType.Lose:
-				currentPlayer.roundEarnings -= nextSpinCost;
+				currentPlayer.roundEarnings -= spinReward;
 				break;
 			case Wedge.WedgeType.Double:
-				currentPlayer.roundEarnings += nextSpinCost * 2;
+				currentPlayer.roundEarnings += spinReward * 2;
 				break;
 			case Wedge.WedgeType.Triple:
-				currentPlayer.roundEarnings += nextSpinCost  * 3;
+				currentPlayer.roundEarnings += spinReward  * 3;
 				break;
 			case Wedge.WedgeType.Half:
-				currentPlayer.roundEarnings += nextSpinCost / 2;
+				currentPlayer.roundEarnings += spinReward / 2;
 				break;
 			case Wedge.WedgeType.Add:
 				currentPlayer.roundEarnings += wedge.Amount;
@@ -146,6 +149,8 @@ public partial class TurnManager : Node
 
 			// Add additional wedge types here
 		}
+		
+		nextSpinWinningsMultiplier = 1;
 		if(wedge.audio != null && audioPlayer != null)
 		{
 			audioPlayer.Stream = wedge.audio;
