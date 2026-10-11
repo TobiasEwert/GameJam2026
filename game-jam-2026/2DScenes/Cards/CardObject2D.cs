@@ -133,9 +133,19 @@ public void _on_button_pressed(int index)
 	if(opponent == null)
 		return;
 
-	if(opponent.abilityCards.Count == 0)
+	var playableIndexes = new System.Collections.Generic.List<int>();
+	for (int i = 0; i < opponent.abilityCards.Count; i++)
 	{
-		ShowPopup("Opponent has no cards to use.");
+		CardData card = opponent.abilityCards[i];
+		if(card != null && card.ActionId != UseOpponentCardId)
+		{
+			playableIndexes.Add(i);
+		}
+	}
+ 
+	if(playableIndexes.Count == 0)
+	{
+		ShowPopup($"{opponent.playerName} has no cards you can use.");
 		return;
 	}
 
@@ -145,7 +155,7 @@ public void _on_button_pressed(int index)
 
 	CardData stolenCard = opponent.abilityCards[randomIndex];
 	opponent.abilityCards.RemoveAt(randomIndex);
-	
+
 	popupPrefix = $"{activePlayer.playerName} took {stolenCard.CardName} from {opponent.playerName}!\n\n";
 	ActivateCardAbility(stolenCard.ActionId);
 	popupPrefix = "";
