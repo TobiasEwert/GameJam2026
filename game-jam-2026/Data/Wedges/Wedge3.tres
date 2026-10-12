@@ -8,7 +8,6 @@
 script = ExtResource("2_wuuew")
 Label = "$200"
 Icon = ExtResource("1_shmiu")
-Type = 7
 Amount = 200
 Weight = 0.3
 Color = Color(0.12156863, 0.6156863, 0.33333334, 1)

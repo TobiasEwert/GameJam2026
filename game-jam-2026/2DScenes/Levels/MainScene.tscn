@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cu8ojt07nsqlw" path="res://Art/Stages/PushYourLuck_Card3.png" id="5_qm2ls"]
 [ext_resource type="Texture2D" uid="uid://cxjbwttbkkbfj" path="res://Art/Stages/PushYourLuck_Card4.png" id="6_a8fvf"]
 [ext_resource type="AudioStream" uid="uid://d21cg7tlljpjy" path="res://Audio/Background/MainScreenBg.mp3" id="6_qsmkw"]
-[ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="7_qsmkw"]
 [ext_resource type="FontFile" uid="uid://c358yhmpg8e31" path="res://Art/Font/ClabTrial-Bold.ttf" id="9_bgl7e"]
-[ext_resource type="AudioStream" uid="uid://cnfylghwifank" path="res://Audio/Background/StartScreenBg.mp3" id="12_bgl7e"]
 [ext_resource type="PackedScene" uid="uid://c3aevit87wy2f" path="res://UI/Scenes/PlayerHUD.tscn" id="12_qsmkw"]
+[ext_resource type="Texture2D" uid="uid://b2kesc31n27vw" path="res://Art/Stages/PushYourLuckTexture.png" id="13_euts4"]
 [ext_resource type="PackedScene" uid="uid://dqgr2jh3v65kw" path="res://2DScenes/Levels/GameOver.tscn" id="13_qsmkw"]
 
 [sub_resource type="Resource" id="Resource_y8rvs"]
@@ -20,11 +19,12 @@ script = ExtResource("3_qsmkw")
 CardName = "Seeker"
 Description = "TEST 1"
 Icon = ExtResource("2_euts4")
+ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_u1ot7"]
 script = ExtResource("3_qsmkw")
-CardName = "TEST 2"
+CardName = "Randomizer"
 Description = "TEST 2"
 Icon = ExtResource("4_12uyl")
 ActionId = 1
@@ -32,18 +32,19 @@ metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_nt8ol"]
 script = ExtResource("3_qsmkw")
-CardName = "TEST 3"
+CardName = "Money Boost"
 Description = "TEST 3"
 Icon = ExtResource("5_qm2ls")
-ActionId = 2
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
 [sub_resource type="Resource" id="Resource_wo86d"]
 script = ExtResource("3_qsmkw")
+CardName = "Forced"
 Icon = ExtResource("6_a8fvf")
+ActionId = 3
 metadata/_custom_type_script = "uid://lwmx5ydk4pu1"
 
-[sub_resource type="LabelSettings" id="LabelSettings_euts4"]
+[sub_resource type="LabelSettings" id="LabelSettings_bgl7e"]
 resource_local_to_scene = true
 font = ExtResource("9_bgl7e")
 font_size = 32
@@ -53,17 +54,15 @@ font_color = Color(0.9098039, 0.72156864, 0.2901961, 1)
 script = ExtResource("1_hfy5k")
 allCards = Array[Object]([SubResource("Resource_y8rvs"), SubResource("Resource_u1ot7"), SubResource("Resource_nt8ol"), SubResource("Resource_wo86d")])
 gameOverScreen = NodePath("GameOverControl")
-mainGameUI = [NodePath("Cards"), NodePath("HUD"), NodePath("Background")]
+mainGameUI = [NodePath("Cards"), NodePath("HUD"), null]
 wheelRoot = NodePath("WheelBase/Wheel/WheelRoot")
 gameOverMusic = ExtResource("6_qsmkw")
 audioPlayer = NodePath("AudioStreamPlayer2D")
 
-[node name="Background" type="TextureRect" parent="." unique_id=854973071]
-offset_left = -78.0
-offset_top = 52.0
-offset_right = 1187.0
-offset_bottom = 760.0
-texture = ExtResource("7_qsmkw")
+[node name="PushYourLuckTexture" type="Sprite2D" parent="." unique_id=954210300]
+position = Vector2(558, 405)
+scale = Vector2(1.0935875, 1.0984615)
+texture = ExtResource("13_euts4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1321567388]
 position = Vector2(552, 404)
@@ -110,7 +109,7 @@ offset_bottom = 387.0
 metadata/_edit_use_anchors_ = true
 
 [node name="RoundPotLabel" parent="WheelBase/Bank Money" index="0" unique_id=106352326]
-label_settings = SubResource("LabelSettings_euts4")
+label_settings = SubResource("LabelSettings_bgl7e")
 metadata/_edit_use_anchors_ = true
 
 [node name="Pointer" parent="WheelBase" index="5" unique_id=68424672]
@@ -123,14 +122,34 @@ offset_right = -275.875
 offset_bottom = 62.775
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=773461283]
-stream = ExtResource("12_bgl7e")
+stream = ExtResource("6_qsmkw")
 autoplay = true
 
 [node name="GameOverControl" parent="." unique_id=1382353567 instance=ExtResource("13_qsmkw")]
-offset_left = 569.0
-offset_top = 405.0
-offset_right = 569.0
-offset_bottom = 405.0
+visible = false
+offset_left = 492.0
+offset_top = 348.0
+offset_right = 492.0
+offset_bottom = 348.0
+scale = Vector2(1.1200024, 1.24)
+
+[node name="VBoxContainer" parent="GameOverControl" index="2" unique_id=1926391979]
+offset_left = -197.32098
+offset_top = -174.19356
+offset_right = 252.67902
+offset_bottom = 8.806442
+
+[node name="p1Money" parent="GameOverControl" index="3" unique_id=1569464566]
+offset_left = -356.24924
+offset_top = -107.258064
+offset_right = -143.24924
+offset_bottom = -67.258064
+
+[node name="p2Money" parent="GameOverControl" index="4" unique_id=1518766884]
+offset_left = 211.6067
+offset_top = -107.258064
+offset_right = 424.6067
+offset_bottom = -67.258064
 
 [node name="HUD" parent="." unique_id=1905705143 instance=ExtResource("12_qsmkw")]
 offset_left = 1.0
@@ -143,3 +162,4 @@ metadata/_edit_use_anchors_ = true
 
 [editable path="WheelBase"]
 [editable path="WheelBase/StockScreen"]
+[editable path="GameOverControl"]

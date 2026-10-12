@@ -39,6 +39,10 @@ public partial class TurnManager : Node
 	public int currentRound { get; set; }
 	public int spinsThisTurn { get; set; }
 	public int nextSpinCost = 0;	
+	public int nextSpinWinningsMultiplier = 1;
+	public const int MinForcedBet = 250;
+	private int[] pendingForcedBet = new int[2];
+	public bool forcedBetActive { get; private set; }
 	public CardData[] possibleCards { get; set; }	
 	[Export] public AudioStreamPlayer2D audioPlayer;
 	public override void _Ready()
@@ -60,6 +64,7 @@ public partial class TurnManager : Node
 		EmitSignal(SignalName.GameStarted);
 		EmitSignal(SignalName.RoundChanged, currentRound);
 		StartTurn();
+		
 	}
 
 	public void StartTurn()
@@ -70,6 +75,16 @@ public partial class TurnManager : Node
 		currentPlayer.roundEarnings = 0; // reset the round earnings at the start of the turn, pot
 		spinsThisTurn = 0;
 		nextSpinCost = 0;
+		nextSpinWinningsMultiplier = 1;
+		forcedBetActive = false;
+
+		int forcedBet = pendingForcedBet[currentPlayerIndex];
+		pendingForcedBet[currentPlayerIndex] = 0;
+		if(forcedBet > 0)
+		{
+			nextSpinCost = Mathf.Min(forcedBet, currentPlayer.currency);
+			forcedBetActive = nextSpinCost > 0;
+		}
 		EmitSignal(SignalName.TurnStarted, currentPlayerIndex);
 		currentState = TurnState.PlayerAction;
 		// Do Not change state here, change it on the Action Logic, sit on PlayerAction until an action is taken
@@ -102,6 +117,7 @@ public partial class TurnManager : Node
 			return false; // not enough money
 		}
 		spinsThisTurn++;
+		forcedBetActive = false;
 		return true;
 	}
 
@@ -146,6 +162,12 @@ public partial class TurnManager : Node
 
 			// Add additional wedge types here
 		}
+		int gained = currentPlayer.roundEarnings - oldPot;
+		if(nextSpinWinningsMultiplier > 1 && gained > 0)
+		{
+			currentPlayer.roundEarnings = oldPot + gained * nextSpinWinningsMultiplier;
+		}
+		nextSpinWinningsMultiplier = 1;
 		if(wedge.audio != null && audioPlayer != null)
 		{
 			audioPlayer.Stream = wedge.audio;
@@ -176,6 +198,10 @@ public partial class TurnManager : Node
 		if(currentState != TurnState.PlayerAction)
 		{
 			return; 
+		}
+		if(forcedBetActive)
+		{
+			return;
 		}
 		currentPlayer.currency += currentPlayer.roundEarnings;
 		currentPlayer.roundEarnings = 0;
@@ -219,6 +245,27 @@ public partial class TurnManager : Node
 		StartTurn();
 	}
 
+	public int SetForcedBet(int targetPlayerIndex)
+	{
+		int targetMoney = players[targetPlayerIndex].currency;
+		if(targetMoney <= 0)
+		{
+			return 0;
+		}
+		int amount;
+		if(targetMoney <= MinForcedBet)
+		{
+			amount = targetMoney; // can't cover the minimum, so they go all in
+		}
+		else
+		{
+			var rng = new RandomNumberGenerator();
+			rng.Randomize();
+			amount = rng.RandiRange(MinForcedBet, targetMoney);
+		}
+		pendingForcedBet[targetPlayerIndex] = amount;
+		return amount;
+	}
 	public void EndGame()
 	{
 		currentState = TurnState.GameOver;
